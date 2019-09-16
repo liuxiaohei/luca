@@ -1,4 +1,4 @@
-package org.ld.actor;
+package org.ld.actors;
 
 import akka.actor.AbstractLoggingActor;
 import akka.actor.ActorRef;
