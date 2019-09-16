@@ -24,7 +24,7 @@ public class I18N {
         return getLocalResource(Locale.getDefault(), "values/error_strings", key, args);
     }
 
-    private static String getLocalResource(Locale locale, String baseName, String key, Object... args) {
+    public static String getLocalResource(Locale locale, String baseName, String key, Object... args) {
         return Optional.of(ResourceBundle.getBundle(baseName, locale))
                 .map(rb -> rb.getString(key))
                 .map(message -> {
