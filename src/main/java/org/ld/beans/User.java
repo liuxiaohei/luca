@@ -1,4 +1,4 @@
-package org.ld.actor;
+package org.ld.beans;
 
 public final class User {
     private final long userId;

@@ -6,6 +6,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import org.ld.beans.User;
 
 
 public class Counter extends AbstractLoggingActor {
@@ -17,7 +18,8 @@ public class Counter extends AbstractLoggingActor {
         return receiveBuilder()
                 .match(User.class, e -> getSender().tell("成功收到用户消息!", ActorRef.noSender()))
                 .matchAny(messages -> log.info("UserLoginActor 接收到消息:{}", messages))
-                .build();    }
+                .build();
+    }
 
 
     public static void main(String[] args) {
