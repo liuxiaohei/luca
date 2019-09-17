@@ -1,4 +1,4 @@
-package org.ld.nio.socket;
+package org.ld.learn.nio.socket;
 
 import org.junit.Test;
 
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 

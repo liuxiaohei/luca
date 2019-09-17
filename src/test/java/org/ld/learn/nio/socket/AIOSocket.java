@@ -1,4 +1,4 @@
-package org.ld.nio.socket;
+package org.ld.learn.nio.socket;
 
 import java.io.BufferedReader;
 import java.io.IOException;

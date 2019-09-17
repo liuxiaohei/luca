@@ -1,4 +1,4 @@
-package org.ld
+package org.ld.learn.akka
 
 import akka.actor.{Actor, ActorRef, ActorSystem, PoisonPill, Props}
 
