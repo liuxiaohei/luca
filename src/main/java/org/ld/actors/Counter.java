@@ -22,11 +22,12 @@ public class Counter extends AbstractLoggingActor {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ActorSystem actorSystem = ActorSystem.create("actorSystemName");
         ActorRef userLoginActor = actorSystem.actorOf(Props.create(Counter.class, Counter::new), "userLoginActorName");
         userLoginActor.tell(new User(1, "Dong", 30), ActorRef.noSender());
         userLoginActor.tell("哇", ActorRef.noSender());
+        Thread.sleep(10);
         actorSystem.terminate(); // 这个方法终止 actor
     }
 }
