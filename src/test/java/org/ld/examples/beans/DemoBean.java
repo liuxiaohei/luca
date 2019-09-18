@@ -1,4 +1,4 @@
-package org.ld.learn.beans;
+package org.ld.examples.beans;
 
 public class DemoBean {
     String name;

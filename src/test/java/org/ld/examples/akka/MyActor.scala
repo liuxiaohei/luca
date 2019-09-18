@@ -1,4 +1,4 @@
-package org.ld.learn.akka
+package org.ld.examples.akka
 
 import akka.actor.{Actor, Props}
 import akka.event.Logging

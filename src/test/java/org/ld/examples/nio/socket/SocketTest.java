@@ -1,4 +1,4 @@
-package org.ld.learn.nio.socket;
+package org.ld.examples.nio.socket;
 
 import org.junit.Test;
 

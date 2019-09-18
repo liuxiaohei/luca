@@ -1,4 +1,4 @@
-package org.ld.learn.nio;
+package org.ld.examples.nio;
 
 import org.junit.Test;
 

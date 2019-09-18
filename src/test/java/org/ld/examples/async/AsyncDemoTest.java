@@ -1,4 +1,4 @@
-package org.ld.learn.async;
+package org.ld.examples.async;
 
 import org.junit.Test;
 
