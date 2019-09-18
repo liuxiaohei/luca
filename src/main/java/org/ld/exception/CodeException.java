@@ -1,6 +1,8 @@
 package org.ld.exception;
 
 
+import scala.Enumeration;
+
 @SuppressWarnings("unused")
 public class CodeException extends RuntimeException {
 
@@ -25,4 +27,7 @@ public class CodeException extends RuntimeException {
         throw new CodeException(info);
     }
 
+    public static void throwException(Enumeration.Value value) {
+        throw new CodeException(new ErrorCode(value));
+    }
 }
