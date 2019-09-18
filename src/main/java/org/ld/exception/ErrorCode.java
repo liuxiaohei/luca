@@ -1,30 +1,21 @@
 package org.ld.exception;
 
-
-import org.ld.utils.I18N;
-
-import java.util.*;
+import scala.Enumeration;
 
 @SuppressWarnings("unused")
 public class ErrorCode {
 
-    private static final String BASE_NAME = "values/status_strings";
-
     private int code;
 
-    private String msgKey;
+    private String msg;
 
-    public ErrorCode(int code, String msgKey) {
-        this.code = code;
-        this.msgKey = msgKey;
+    public ErrorCode(Enumeration.Value value) {
+        this.code = value.id();
+        this.msg = value.toString();
     }
 
     public String getMessage() {
-        return I18N.getLocalResource(Locale.getDefault(), BASE_NAME, msgKey);
-    }
-
-    public String getMsgKey() {
-        return this.msgKey;
+        return msg;
     }
 
     public int getCode() {
