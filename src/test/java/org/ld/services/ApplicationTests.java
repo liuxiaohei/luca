@@ -2,7 +2,6 @@ package org.ld.services;
 
 import org.ld.Application;
 import org.ld.mapper.AdapterMapper;
-import org.ld.mapper.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
