@@ -2,6 +2,7 @@ package org.ld.utils;
 
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class UuidUtils {
 
     private static final String[] chars = new String[]{

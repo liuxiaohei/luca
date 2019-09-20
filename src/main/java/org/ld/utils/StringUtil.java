@@ -2,6 +2,7 @@ package org.ld.utils;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public class StringUtil {
 
     private static Logger logger = Logger.newInstance(StringUtil.class);

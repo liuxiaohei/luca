@@ -3,6 +3,7 @@ package org.ld.utils;
 
 /**
  */
+@SuppressWarnings("unused")
 public class NumberUtil {
 
     public static boolean isValidId(Long id) {

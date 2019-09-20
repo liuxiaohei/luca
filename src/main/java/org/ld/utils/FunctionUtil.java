@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 /**
  *
  */
+@SuppressWarnings("unused")
 public class FunctionUtil {
 
     /**

@@ -2,7 +2,7 @@ package org.ld.utils;
 
 import org.springframework.lang.NonNull;
 
-
+@SuppressWarnings("unused")
 public class JSONUtil {
     private static final Logger logger = Logger.newInstance(JSONUtil.class);
 

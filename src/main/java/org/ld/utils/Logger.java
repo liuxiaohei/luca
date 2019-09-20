@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 
 /**
  */
+@SuppressWarnings("unused")
 public class Logger {
     private final org.slf4j.Logger logger;
 

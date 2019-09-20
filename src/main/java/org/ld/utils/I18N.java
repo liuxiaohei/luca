@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 /**
  * Description: 国际化工具类
  */
+@SuppressWarnings("unused")
 public class I18N {
 
     /**
