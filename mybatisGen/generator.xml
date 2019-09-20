@@ -38,23 +38,6 @@
         </javaClientGenerator>
 
 
-
-
-
-
-
-        <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-        <!--<table tableName="gray_member" domainObjectName="GrayMember" enableUpdateByPrimaryKey="true"-->
-               <!--enableDeleteByPrimaryKey="true"-->
-               <!--enableInsert="true" enableSelectByPrimaryKey="true" selectByPrimaryKeyQueryId="true"-->
-               <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true" selectByExampleQueryId="true">-->
-            <!--&lt;!&ndash; ibatis id 在返回值里   mybatis id 在对象中获取&ndash;&gt;-->
-            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-            <!--&lt;!&ndash; 忽略时间字段 &ndash;&gt;-->
-            <!--<ignoreColumn column="create_time"/>-->
-            <!--<ignoreColumn column="delete_time"/>-->
-        <!--</table>-->
         <table tableName="adapter" domainObjectName="Adapter" enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true"
                enableInsert="true" enableSelectByPrimaryKey="true" selectByPrimaryKeyQueryId="true"

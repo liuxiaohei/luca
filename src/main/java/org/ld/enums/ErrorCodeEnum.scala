@@ -6,4 +6,5 @@ package org.ld.enums
  */
 object ErrorCodeEnum extends Enumeration {
   val SUCCESS = Value(1000,"成功")
+  val UNKNOW = Value(-1,"未知异常")
 }

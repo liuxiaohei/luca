@@ -23,6 +23,10 @@ public class CodeException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
+    public Enumeration.Value getValue() {
+        return errorCode.getValue();
+    }
+
     public static void throwException(ErrorCode info) {
         throw new CodeException(info);
     }
