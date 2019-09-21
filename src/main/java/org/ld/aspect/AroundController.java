@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.ErrorCodeEnum;
 import org.ld.exception.CodeException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ld.utils.JSONUtil;
+import org.ld.utils.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,7 +22,7 @@ import java.util.Optional;
 @Component
 public class AroundController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AroundController.class);
+    private static final Logger LOG = Logger.newInstance(AroundController.class);
     private static final Map<Class, Enumeration.Value> EXCEPTIONS = new HashMap<>();
 
     static {
@@ -40,14 +40,15 @@ public class AroundController {
             final Object body = point.proceed();
             result.setData(body);
             result.setState(ErrorCodeEnum.SUCCESS().id());
+            LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));
             return result;
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
                 throw new CodeException(e);
             }
-            LOG.info("Logger", e);
+            LOG.printStackTrace(e);
             if (e instanceof OutOfMemoryError) {
-                LOG.error("OutOfMemoryError:", e);
+                LOG.error(() -> "OutOfMemoryError:", e);
                 System.exit(0);
                 return null;
             }
@@ -62,7 +63,7 @@ public class AroundController {
                             .orElse(e.getMessage()));
             result.setState(Optional.ofNullable(se).map(CodeException::getValue).map(Enumeration.Value::id).orElseGet(() -> ErrorCodeEnum.UNKNOW().id()));
             result.setMessage(errMsg);
-            LOG.info("Response Body : {0}", result.toString());
+            LOG.info(() -> "Response Body : " +  JSONUtil.obj2String(result));
             return result;
         }
     }

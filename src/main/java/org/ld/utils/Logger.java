@@ -38,6 +38,14 @@ public class Logger {
     }
 
     /**
+     */
+    public void error(Supplier<String> supplier, Object... params) {
+        if (logger.isErrorEnabled()) {
+            logger.error(supplier.get(), params);
+        }
+    }
+
+    /**
      * 打印异常信息
      */
     public void printStackTrace(Throwable e) {
