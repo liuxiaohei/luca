@@ -40,6 +40,12 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 
+        <!-- spring-aop 引入 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!-- test引入测试依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

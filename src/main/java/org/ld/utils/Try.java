@@ -1,5 +1,6 @@
 package org.ld.utils;
 
+import org.ld.exception.CodeException;
 import org.ld.functions.UncheckedFunction;
 
 import java.util.Objects;
@@ -23,7 +24,7 @@ public class Try {
             try {
                 return mapper.apply(t);
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new CodeException(ex);
             }
         };
     }
