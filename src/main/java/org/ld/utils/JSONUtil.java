@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Created by leon on 17-5-10.
+ * json工具
  */
 public class JSONUtil {
 
@@ -22,6 +22,15 @@ public class JSONUtil {
         return objectMapper.convertValue(jsonNode, type);
     }
 
+    public static String obj2String(Object obj) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new CodeException(e);
+        }
+    }
+
     public static <T> T json2Obj(String json, Class<T> cls) {
         JsonNode jsonNode = toJsonNode(json);
         if (jsonNode == null) return null;
@@ -29,18 +38,10 @@ public class JSONUtil {
         return objectMapper.convertValue(jsonNode, cls);
     }
 
-    public static  Map<String, Object> String2Map(String json) {
-        JsonNode jsonNode = toJsonNode(json);
-        if (jsonNode == null) return Collections.emptyMap();
-        ObjectMapper objectMapper = new ObjectMapper();
-        JavaType type = objectMapper.getTypeFactory().constructMapType(Map.class, String.class, Object.class);
-        return objectMapper.convertValue(jsonNode, type);
-    }
-
-    public static Map<String, Object> getMap(String json) {
+    public static Map<String, String> json2Map(String json) {
         if (StringUtil.isBlank(json)) return Collections.emptyMap();
         try {
-            return new ObjectMapper().readValue(json, new TypeReference<Map<String, Object>>() {
+            return new ObjectMapper().readValue(json, new TypeReference<Map<String, String>>() {
             });
         } catch (IOException e) {
             throw new CodeException(e);
