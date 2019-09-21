@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 /**
  *
  */
+@SuppressWarnings("unused")
 @Configuration
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @PropertySources(value = {
@@ -30,15 +31,6 @@ public class DataSourceConfiguration {
     @Value("${db.password}")
     private String passWord;
 
-    @Value("${db.poolPingEnabled}")
-    private Boolean poolPingEnabled;
-
-    @Value("${db.poolPingQuery}")
-    private String poolPingQuery;
-
-    @Value("${db.poolPingConnectionsNotUsedFor}")
-    private Long poolPingConnectionsNotUsedFor;
-
     @Bean
     @Primary
     public DataSource dataSource() {
@@ -47,7 +39,6 @@ public class DataSourceConfiguration {
         datasource.setUsername(userName);
         datasource.setPassword(passWord);
         datasource.setDriverClassName(driver);
-        datasource.setConnectionTestQuery(poolPingQuery);
         datasource.setAutoCommit(true);
         datasource.setMaximumPoolSize(30);
         datasource.setMinimumIdle(5);
