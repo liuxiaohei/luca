@@ -18,9 +18,7 @@ public class LucaConfig {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        //  单个数据大小
         factory.setMaxFileSize("20480KB");
-        // 总上传数据大小
         factory.setMaxRequestSize("102400KB");
         return factory.createMultipartConfig();
     }

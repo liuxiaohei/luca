@@ -62,7 +62,6 @@ public class Logger {
     /**
      * 打印异常信息
      *
-     * @see #debugThrowable(Supplier)
      */
     @Deprecated
     public void printDebugStackTrace(Throwable e) {
