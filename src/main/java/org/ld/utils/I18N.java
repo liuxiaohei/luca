@@ -12,13 +12,6 @@ import java.util.ResourceBundle;
 public class I18N {
 
     /**
-     * biz_string.properties
-     */
-    public static String getString(String key, Object... args) {
-        return getLocalResource(Locale.getDefault(), "values/biz_strings", key, args);
-    }
-
-    /**
      * error_strings.properties
      */
     public static String getErrorMsg(String key, Object... args) {
