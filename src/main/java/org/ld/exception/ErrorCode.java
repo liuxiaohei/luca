@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
@@ -25,12 +26,18 @@ public class ErrorCode {
         EXCEPTIONS.put(DataAccessException.class, SystemErrorCodeEnum.DATA_ACCESS_FAILED());
     }
 
+    private static AtomicBoolean merged = new AtomicBoolean(false);
+
     /**
-     * 只运行一次 添加自定义Exception判断
+     * 添加自定义Exception判断规则(只有第一次运行时才生效)
+     * todo 用Akka实现
      */
     @Deprecated
-    public static void mergeExceptionRule(Consumer<Map<Class, Enumeration.Value>> exceptionsConsumer) {
-        exceptionsConsumer.accept(EXCEPTIONS);
+    public synchronized static void mergeExceptionRule(Consumer<Map<Class, Enumeration.Value>> exceptionsConsumer) {
+        if (!merged.get()) {
+            exceptionsConsumer.accept(EXCEPTIONS);
+            merged.set(true);
+        }
     }
 
     /**
