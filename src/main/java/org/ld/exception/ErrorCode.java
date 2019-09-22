@@ -42,6 +42,9 @@ public class ErrorCode {
     }
 
     public static Optional<Enumeration.Value> getSystemErrorValue(Throwable e) {
+        if (e instanceof CodeException) {
+            return Optional.of((CodeException) e).map(CodeException::getValue);
+        }
         return EXCEPTIONS.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey().isInstance(e))

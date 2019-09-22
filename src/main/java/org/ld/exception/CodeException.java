@@ -31,4 +31,8 @@ public class CodeException extends RuntimeException {
     public static void throwException(Enumeration.Value value) {
         throw new CodeException(new ErrorCode(value));
     }
+
+    public static void throwException(Throwable e) {
+        throw new CodeException(e);
+    }
 }

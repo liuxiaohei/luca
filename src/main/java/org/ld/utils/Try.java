@@ -23,7 +23,7 @@ public class Try {
         return t -> {
             try {
                 return mapper.apply(t);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 throw new CodeException(ex);
             }
         };
@@ -37,7 +37,7 @@ public class Try {
         return t -> {
             try {
                 return mapper.apply(t);
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 return Optional.ofNullable(defaultValue).map(Supplier::get).orElse(null);
             }
         };
