@@ -4,8 +4,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.ld.beans.ResponseBodyBean;
-import org.ld.enums.ErrorCodeEnum;
+import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeException;
+import org.ld.exception.ErrorCode;
 import org.ld.utils.JSONUtil;
 import org.ld.utils.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import scala.Enumeration;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
@@ -23,11 +22,6 @@ import java.util.Optional;
 public class AroundController {
 
     private static final Logger LOG = Logger.newInstance(AroundController.class);
-    private static final Map<Class, Enumeration.Value> EXCEPTIONS = new HashMap<>();
-
-    static {
-        EXCEPTIONS.put(NumberFormatException.class, ErrorCodeEnum.SUCCESS());
-    }
 
     /**
      * 对Controller的方法进一步进行转化处理
@@ -39,9 +33,7 @@ public class AroundController {
         try {
             final Object body = point.proceed();
             result.setData(body);
-            result.setState(ErrorCodeEnum.SUCCESS().id());
-            LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));
-            return result;
+            result.setState(SystemErrorCodeEnum.SUCCESS().id());
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
                 throw new CodeException(e);
@@ -52,20 +44,24 @@ public class AroundController {
                 System.exit(0);
                 return null;
             }
-            final CodeException se = findException(e);
-            final String errMsg = Optional.ofNullable(se)
+            final CodeException se = Optional.ofNullable(findException(e))
+                    .orElseGet(() -> ErrorCode.getSystemErrorValue(e)
+                            .map(ErrorCode::new)
+                            .map(CodeException::new)
+                            .orElseGet(() -> new CodeException(new ErrorCode(SystemErrorCodeEnum.UNKNOW()))));
+            final String errMsg = Optional.of(se)
                     .map(CodeException::getValue)
+                    .filter(value -> !value.equals(SystemErrorCodeEnum.UNKNOW()))
                     .map(Enumeration.Value::toString)
-                    .orElseGet(() -> EXCEPTIONS.entrySet().stream()
-                            .filter(entry -> entry.getKey().isInstance(e))
-                            .map(Map.Entry::getValue)
-                            .map(Enumeration.Value::toString).findFirst()
-                            .orElse(e.getMessage()));
-            result.setState(Optional.ofNullable(se).map(CodeException::getValue).map(Enumeration.Value::id).orElseGet(() -> ErrorCodeEnum.UNKNOW().id()));
+                    .orElseGet(e::getMessage);
+            Optional.of(se)
+                    .map(CodeException::getValue)
+                    .map(Enumeration.Value::id)
+                    .ifPresent(result::setState);
             result.setMessage(errMsg);
-            LOG.info(() -> "Response Body : " +  JSONUtil.obj2String(result));
-            return result;
         }
+        LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));
+        return result;
     }
 
     /**

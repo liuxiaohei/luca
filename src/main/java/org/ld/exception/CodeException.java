@@ -1,7 +1,7 @@
 package org.ld.exception;
 
 
-import org.ld.enums.ErrorCodeEnum;
+import org.ld.enums.SystemErrorCodeEnum;
 import scala.Enumeration;
 
 @SuppressWarnings("unused")
@@ -16,9 +16,8 @@ public class CodeException extends RuntimeException {
 
     public CodeException(Throwable e) {
         super(e.getMessage(), e);
-        super.setStackTrace(e.getStackTrace()); // 替换StackTrace 避免调用过程中线索中断
-        ErrorCode errorCode = new ErrorCode(ErrorCodeEnum.UNKNOW()); // todo 这里面增加 判断 自动根据错误生成异常码
-        this.errorCode = errorCode;
+        super.setStackTrace(e.getStackTrace());
+        this.errorCode = new ErrorCode(ErrorCode.getSystemErrorValue(e).orElseGet(SystemErrorCodeEnum::UNKNOW));
     }
 
     public Enumeration.Value getValue() {
