@@ -26,8 +26,7 @@ public class AroundController {
     /**
      * 对Controller的方法进一步进行转化处理
      */
-    @Around("execution(public * org.ld.controller.*.*(..))"
-    )
+    @Around("execution(public * org.ld.controller.*.*(..))")
     public Object mapResponseBodyAdvice(ProceedingJoinPoint point) {
         ResponseBodyBean<Object> result = new ResponseBodyBean<>();
         try {
