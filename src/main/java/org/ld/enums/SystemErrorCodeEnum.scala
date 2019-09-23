@@ -3,6 +3,7 @@ package org.ld.enums
 /*
  * @author ld
  * 系统级ErrorCode
+ * https://tools.ietf.org/html/rfc7231#section-6.5.1
  */
 object SystemErrorCodeEnum extends Enumeration {
   val UNKNOW = Value(-1,"未知异常")
