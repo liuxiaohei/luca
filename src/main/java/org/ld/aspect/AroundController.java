@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import scala.Enumeration;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
@@ -57,6 +59,11 @@ public class AroundController {
                     .map(CodeException::getValue)
                     .map(Enumeration.Value::id)
                     .ifPresent(result::setState);
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            result.setStackTrace(sw.toString());
             result.setMessage(errMsg);
         }
         LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));

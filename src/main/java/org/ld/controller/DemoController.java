@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  */
@@ -22,6 +23,14 @@ public class DemoController {
         Map<String, Object> b = new HashMap<>();
         b.put("wer", Arrays.asList("234", "333", "eee"));
         a.put("aaa", b);
+        return a;
+    }
+
+    @ApiOperation(value = "错误事例", produces = "application/json")
+    @GetMapping(value = "errordemo")
+    public Object errorDemo() {
+        Map<String, Object> a = new HashMap<>();
+        Objects.requireNonNull(null);
         return a;
     }
 
