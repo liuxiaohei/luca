@@ -19,6 +19,7 @@ public class ErrorCode {
     private static final Map<Class, Enumeration.Value> EXCEPTIONS = new HashMap<>();
 
     static {
+        EXCEPTIONS.put(NullPointerException.class, SystemErrorCodeEnum.NULL_POINTER_EXCEPTION());
         EXCEPTIONS.put(NumberFormatException.class, SystemErrorCodeEnum.PARAMS_INVALID());
         EXCEPTIONS.put(HttpMessageNotReadableException.class, SystemErrorCodeEnum.PARAMS_INVALID());
         EXCEPTIONS.put(MethodArgumentNotValidException.class, SystemErrorCodeEnum.PARAMS_INVALID());
