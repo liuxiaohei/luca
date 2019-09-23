@@ -1,7 +1,9 @@
 package org.ld.utils;
 
+import org.ld.exception.CodeException;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 
@@ -39,9 +41,13 @@ public class Logger {
 
     /**
      */
-    public void error(Supplier<String> supplier, Object... params) {
-        if (logger.isErrorEnabled()) {
-            logger.error(supplier.get(), params);
+    public void error(Callable<String> callable, Object... params) {
+        try {
+            if (logger.isErrorEnabled()) {
+                logger.error(callable.call(), params);
+            }
+        } catch (Exception e) {
+            throw new CodeException(e);
         }
     }
 
@@ -61,7 +67,6 @@ public class Logger {
 
     /**
      * 打印异常信息
-     *
      */
     @Deprecated
     public void printDebugStackTrace(Throwable e) {
