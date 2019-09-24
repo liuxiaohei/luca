@@ -23,7 +23,7 @@ import java.util.Optional;
 @Component
 public class AroundController {
 
-    private static final Logger LOG = Logger.newInstance(AroundController.class);
+    private static final Logger LOG = Logger.newInstance();
 
     /**
      * 对Controller的方法进一步进行转化处理
