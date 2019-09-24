@@ -4,7 +4,6 @@ import org.ld.exception.CodeException;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Callable;
-import java.util.function.Supplier;
 
 
 /**
@@ -19,6 +18,7 @@ public class Logger {
 
     /**
      * 不推荐使用
+     *
      * @see #newInstance()
      */
     @Deprecated
@@ -37,33 +37,29 @@ public class Logger {
         }
     }
 
-    public void debug(Supplier<String> supplier) {
+    public void debug(Callable<String> callable) {
         if (logger.isDebugEnabled()) {
-            logger.debug(supplier.get());
+            logger.debug(Try.of(callable).get());
         }
     }
 
-    public void debugThrowable(Supplier<Throwable> supplier) {
+    public void debugThrowable(Callable<Throwable> callable) {
         if (logger.isDebugEnabled()) {
-            logger.debug("Error : ", supplier.get());
+            logger.debug("Error : ", Try.of(callable).get());
         }
     }
 
-    public void info(Supplier<String> supplier) {
+    public void info(Callable<String> callable) {
         if (logger.isInfoEnabled()) {
-            logger.info(supplier.get());
+            logger.info(Try.of(callable).get());
         }
     }
 
     /**
      */
     public void error(Callable<String> callable, Object... params) {
-        try {
-            if (logger.isErrorEnabled()) {
-                logger.error(callable.call(), params);
-            }
-        } catch (Exception e) {
-            throw new CodeException(e);
+        if (logger.isErrorEnabled()) {
+            logger.error(Try.of(callable).get(), params);
         }
     }
 

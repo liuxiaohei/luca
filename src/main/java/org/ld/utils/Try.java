@@ -3,8 +3,10 @@ package org.ld.utils;
 import org.ld.exception.CodeException;
 import org.ld.functions.UncheckedFunction;
 
+
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -23,6 +25,17 @@ public class Try {
         return t -> {
             try {
                 return mapper.apply(t);
+            } catch (Throwable ex) {
+                throw new CodeException(ex);
+            }
+        };
+    }
+
+    public static <T> Supplier<T> of(Callable<T> callable) {
+        Objects.requireNonNull(callable);
+        return () -> {
+            try {
+                return callable.call();
             } catch (Throwable ex) {
                 throw new CodeException(ex);
             }
