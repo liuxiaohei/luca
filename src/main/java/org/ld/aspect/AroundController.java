@@ -59,11 +59,10 @@ public class AroundController {
                     .map(CodeException::getValue)
                     .map(Enumeration.Value::id)
                     .ifPresent(result::setState);
-
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
-            result.setStackTrace(sw.toString());
+            result.setStackTrace(sw.toString().split("\n\t"));
             result.setMessage(errMsg);
         }
         LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));
