@@ -8,7 +8,7 @@ package org.ld.enums
 @SuppressWarnings(Array("all"))
 object SystemErrorCodeEnum extends Enumeration {
   val UNKNOW = Value(-1, "未知异常")
-  val NULL_POINTER_EXCEPTION = Value(1, "内存溢出异常")
+  val NULL_POINTER_EXCEPTION = Value(1, "空指针异常")
   val OUT_OF_MEMORY_ERROR = Value(2, "内存溢出异常")
   val IO_EXCEPTION = Value(3, "IO异常")
   val FILE_NOTFOUND_EXCEPTION = Value(4, "找不到文件异常")
