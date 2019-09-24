@@ -17,6 +17,18 @@ public class Logger {
         logger = LoggerFactory.getLogger(clazz);
     }
 
+    /**
+     * 不推荐使用
+     * @see #newInstance()
+     */
+    @Deprecated
+    public static Logger newInstance(Class clazz) {
+        return new Logger(clazz);
+    }
+
+    /**
+     *
+     */
     public static Logger newInstance() {
         try {
             return new Logger(ClassLoader.getSystemClassLoader().loadClass(Thread.currentThread().getStackTrace()[2].getClassName())); // 1 代表当前的栈帧 2 代表创建该线程的栈帧
