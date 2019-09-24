@@ -1,6 +1,7 @@
 package org.ld.examples;
 
 import org.junit.Test;
+import org.ld.utils.Logger;
 
 /**
  * 单例模式，确保一个类只有一个实例，它又分为饿单例模式（类加载时实例化一个对象给自己的引用，如果对象很大是对内存一种巨大的浪费）和
@@ -16,6 +17,8 @@ public class SingletonsDemo {
         System.out.println(aaa);
     }
 
+    private static Logger logger = Logger.newInstance();
+
     public SingletonsDemo() {
     }
 
@@ -30,5 +33,9 @@ public class SingletonsDemo {
         System.out.println("step1");                                         // 继续
         SingletonsDemo singletonsDemo1 = SingletonsDemoHolder.singletonsDemo;// 已经懒加载不会重复new
         System.out.println("end");                                           // 结束
+    }
+
+    public static void main(String... args) {
+        logger.info(() -> "aaa");
     }
 }
