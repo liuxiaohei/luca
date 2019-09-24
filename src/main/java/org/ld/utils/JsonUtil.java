@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * json工具
  */
-public class JSONUtil {
+public class JsonUtil {
 
     public static <T> List<T> json2List(String json, Class<T> cls) {
         JsonNode jsonNode = toJsonNode(json);

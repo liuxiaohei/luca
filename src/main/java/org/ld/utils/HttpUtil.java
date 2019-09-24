@@ -8,7 +8,9 @@ import java.net.URL;
 
 /**
  * http工具未完善
+ * https://blog.csdn.net/xiaojin21cen/article/details/86713894
  */
+@SuppressWarnings("unused")
 public class HttpUtil {
 
     private static final Logger LOG = Logger.newInstance(HttpUtil.class);
