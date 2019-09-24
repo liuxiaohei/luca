@@ -1,6 +1,6 @@
 package org.ld.aspect;
 
-import org.ld.utils.JSONUtil;
+import org.ld.utils.JsonUtil;
 import org.ld.utils.Logger;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.MethodParameter;
@@ -41,7 +41,7 @@ public class RequestBodyAdviceHandler implements RequestBodyAdvice {
             MethodParameter parameter,
             Type targetType,
             Class<? extends HttpMessageConverter<?>> converterType) {
-        LOG.info(() -> "RequestBody : " + JSONUtil.obj2String(body));
+        LOG.info(() -> "RequestBody : " + JsonUtil.obj2String(body));
         return body;
     }
 

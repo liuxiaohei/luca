@@ -7,7 +7,7 @@ import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeException;
 import org.ld.exception.ErrorCode;
-import org.ld.utils.JSONUtil;
+import org.ld.utils.JsonUtil;
 import org.ld.utils.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
@@ -65,7 +65,7 @@ public class AroundController {
             result.setStackTrace(sw.toString().split("\n\t"));
             result.setMessage(errMsg);
         }
-        LOG.info(() -> "Response Body : " + JSONUtil.obj2String(result));
+        LOG.info(() -> "Response Body : " + JsonUtil.obj2String(result));
         return result;
     }
 
