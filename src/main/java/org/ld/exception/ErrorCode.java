@@ -23,7 +23,7 @@ public class ErrorCode {
         EXCEPTIONS.put(NumberFormatException.class, SystemErrorCodeEnum.PARAMS_INVALID());
         EXCEPTIONS.put(HttpMessageNotReadableException.class, SystemErrorCodeEnum.PARAMS_INVALID());
         EXCEPTIONS.put(MethodArgumentNotValidException.class, SystemErrorCodeEnum.PARAMS_INVALID());
-        EXCEPTIONS.put(SQLException.class, SystemErrorCodeEnum.DATABASE_ACCESS_FAILED());
+        EXCEPTIONS.put(SQLException.class, SystemErrorCodeEnum.SQL_EXCEPTION());
         EXCEPTIONS.put(DataAccessException.class, SystemErrorCodeEnum.DATA_ACCESS_FAILED());
     }
 
