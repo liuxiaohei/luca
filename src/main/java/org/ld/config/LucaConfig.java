@@ -9,6 +9,7 @@ import javax.servlet.MultipartConfigElement;
  * 获取配置中心的自定义配置信息
  * @author ld
  */
+@SuppressWarnings("unused")
 @Configuration
 public class LucaConfig {
 

@@ -13,6 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * http://127.0.0.1:9999/swagger-ui.html#/
  */
+
+@SuppressWarnings("unused")
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
