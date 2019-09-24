@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class RequestBodyAdviceHandler implements RequestBodyAdvice {
 
-    private static final Logger LOG = Logger.newInstance(RequestBodyAdviceHandler.class);
+    private static final Logger LOG = Logger.newInstance();
 
     @Override
     public boolean supports(MethodParameter methodParameter,

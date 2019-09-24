@@ -17,13 +17,9 @@ public class Logger {
         logger = LoggerFactory.getLogger(clazz);
     }
 
-    public static Logger newInstance(Class clazz) {
-        return new Logger(clazz);
-    }
-
     public static Logger newInstance() {
         try {
-            return Logger.newInstance(ClassLoader.getSystemClassLoader().loadClass(Thread.currentThread().getStackTrace()[2].getClassName())); // 1 代表当前的栈帧 2 代表创建该线程的栈帧
+            return new Logger(ClassLoader.getSystemClassLoader().loadClass(Thread.currentThread().getStackTrace()[2].getClassName())); // 1 代表当前的栈帧 2 代表创建该线程的栈帧
         } catch (Exception e) {
             throw new CodeException(e);
         }

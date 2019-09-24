@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 
 public class CustomUtils {
 
-    private static Logger Log = Logger.newInstance(CustomUtils.class);
+    private static Logger Log = Logger.newInstance();
 
     public static void getInfo(Class<?> clazz) {
         Field fields[] = clazz.getDeclaredFields();

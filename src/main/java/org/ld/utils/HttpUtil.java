@@ -13,7 +13,7 @@ import java.net.URL;
 @SuppressWarnings("unused")
 public class HttpUtil {
 
-    private static final Logger LOG = Logger.newInstance(HttpUtil.class);
+    private static final Logger LOG = Logger.newInstance();
     public static String JSON_TYPE = "application/json";
     public static String STREAM_TYPE = "application/octet-stream";
 

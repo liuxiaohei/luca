@@ -5,7 +5,7 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class StringUtil {
 
-    private static Logger logger = Logger.newInstance(StringUtil.class);
+    private static Logger logger = Logger.newInstance();
 
     public static boolean isEmpty(String str) {
         return str == null || str.trim().length() == 0;
