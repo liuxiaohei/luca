@@ -61,23 +61,14 @@ public class Logger {
         }
     }
 
-    /**
-     * 打印异常信息
-     */
     public void printStackTrace(Throwable e) {
         logger.info("Logger", e);
     }
 
-    /**
-     * 打印异常信息
-     */
     public void printWarnStackTrace(Throwable e) {
         logger.warn("Logger", e);
     }
 
-    /**
-     * 打印异常信息
-     */
     @Deprecated
     public void printDebugStackTrace(Throwable e) {
         logger.debug("Logger", e);

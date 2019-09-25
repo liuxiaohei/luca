@@ -1,9 +1,10 @@
-package org.ld.functions;
+package org.ld.utils;
 
 import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeException;
 import org.ld.exception.ErrorCode;
+import org.ld.functions.UncheckedSupplier;
 import org.ld.utils.JsonUtil;
 import org.ld.utils.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
