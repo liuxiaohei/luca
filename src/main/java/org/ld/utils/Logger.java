@@ -1,10 +1,8 @@
 package org.ld.utils;
 
 import org.ld.exception.CodeException;
+import org.ld.functions.UncheckedSupplier;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.Callable;
-
 
 /**
  */
@@ -37,29 +35,29 @@ public class Logger {
         }
     }
 
-    public void debug(Callable<String> callable) {
+    public void debug(UncheckedSupplier<String> supplier) {
         if (logger.isDebugEnabled()) {
-            logger.debug(Try.of(callable).get());
+            logger.debug(Try.of(supplier).get());
         }
     }
 
-    public void debugThrowable(Callable<Throwable> callable) {
+    public void debugThrowable(UncheckedSupplier<Throwable> supplier) {
         if (logger.isDebugEnabled()) {
-            logger.debug("Error : ", Try.of(callable).get());
+            logger.debug("Error : ", Try.of(supplier).get());
         }
     }
 
-    public void info(Callable<String> callable) {
+    public void info(UncheckedSupplier<String> supplier) {
         if (logger.isInfoEnabled()) {
-            logger.info(Try.of(callable).get());
+            logger.info(Try.of(supplier).get());
         }
     }
 
     /**
      */
-    public void error(Callable<String> callable, Object... params) {
+    public void error(UncheckedSupplier<String> supplier, Object... params) {
         if (logger.isErrorEnabled()) {
-            logger.error(Try.of(callable).get(), params);
+            logger.error(Try.of(supplier).get(), params);
         }
     }
 

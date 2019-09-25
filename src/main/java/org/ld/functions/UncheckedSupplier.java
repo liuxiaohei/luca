@@ -1,6 +1,6 @@
 package org.ld.functions;
 
 @FunctionalInterface
-public interface UncheckedSupplier<T, R> {
+public interface UncheckedSupplier<R> {
     R get() throws Throwable;
 }

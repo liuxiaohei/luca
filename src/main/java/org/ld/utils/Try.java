@@ -2,6 +2,7 @@ package org.ld.utils;
 
 import org.ld.exception.CodeException;
 import org.ld.functions.UncheckedFunction;
+import org.ld.functions.UncheckedSupplier;
 
 
 import java.util.Objects;
@@ -31,11 +32,11 @@ public class Try {
         };
     }
 
-    public static <T> Supplier<T> of(Callable<T> callable) {
-        Objects.requireNonNull(callable);
+    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier) {
+        Objects.requireNonNull(uncheckedSupplier);
         return () -> {
             try {
-                return callable.call();
+                return uncheckedSupplier.get();
             } catch (Throwable ex) {
                 throw new CodeException(ex);
             }
