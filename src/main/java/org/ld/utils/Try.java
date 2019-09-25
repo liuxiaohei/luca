@@ -7,7 +7,6 @@ import org.ld.functions.UncheckedSupplier;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -16,6 +15,7 @@ import java.util.function.Supplier;
  *
  * @author ld
  */
+@SuppressWarnings("unused")
 public class Try {
 
     /**
