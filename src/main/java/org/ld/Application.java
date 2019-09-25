@@ -19,8 +19,4 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@GetMapping(value="/")
-	public String index(){
-		return "hello luca!";
-	}
 }

@@ -41,7 +41,7 @@ public class LucaConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(url -> !("/".equals(url) || "/error".equals(url))) // 屏蔽 这两个api
+                .paths(url -> !"/error".equals(url)) // 屏蔽 这个api
                 .build()
                 .apiInfo(new ApiInfoBuilder()
                         .title("LUCA API")
