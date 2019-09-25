@@ -44,7 +44,7 @@ public class LucaConfig {
                 .paths(url -> !"/error".equals(url)) // 屏蔽 这个api
                 .build()
                 .apiInfo(new ApiInfoBuilder()
-                        .title("LUCA API")
+                        .title("LUCA")
                         .description("系统介绍")
                         .contact(new Contact("ld", "", "2297598383@qq.com"))
                         .version("1.0")
