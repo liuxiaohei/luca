@@ -3,6 +3,7 @@ package org.ld.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeException;
@@ -25,10 +26,15 @@ public class AroundController {
 
     private static final Logger LOG = Logger.newInstance();
 
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
+    public void controllerMethod() {
+
+    }
+
     /**
      * 对Controller的方法进一步进行转化处理
      */
-    @Around("execution(public * org.ld.controller.*.*(..))")
+    @Around("controllerMethod()")
     public Object mapResponseBodyAdvice(ProceedingJoinPoint point) {
         ResponseBodyBean<Object> result = new ResponseBodyBean<>();
         try {
