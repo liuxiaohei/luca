@@ -5,8 +5,6 @@ import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeException;
 import org.ld.exception.ErrorCode;
 import org.ld.functions.UncheckedSupplier;
-import org.ld.utils.JsonUtil;
-import org.ld.utils.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import scala.Enumeration;
@@ -21,7 +19,6 @@ public class ControllerUtil {
 
     /**
      * 转换响应结构体
-     *
      */
     public static Object convertResponseBody(UncheckedSupplier point) {
         ResponseBodyBean<Object> result = new ResponseBodyBean<>();
@@ -68,12 +65,8 @@ public class ControllerUtil {
      * 找到第一个CodeException
      */
     private static CodeException findException(Throwable t) {
-        if (t == null) {
-            return null;
-        }
-        if (t instanceof CodeException) {
-            return (CodeException) t;
-        }
+        if (t == null) return null;
+        if (t instanceof CodeException) return (CodeException) t;
         return findException(t.getCause());
     }
 }
