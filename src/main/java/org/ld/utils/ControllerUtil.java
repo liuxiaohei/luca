@@ -29,6 +29,7 @@ public class ControllerUtil {
             final Object body = point.get();
             result.setData(body);
             result.setState(SystemErrorCodeEnum.SUCCESS().id());
+            result.setMessage(SystemErrorCodeEnum.SUCCESS().toString());
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
                 throw new CodeException(e);

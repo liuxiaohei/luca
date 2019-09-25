@@ -8,7 +8,7 @@ import scala.beans.BeanProperty
  */
 class ResponseBodyBean[T] {
   @BeanProperty var state: Integer = _
-  @BeanProperty var message: String = "成功!"
+  @BeanProperty var message: String = _
   @BeanProperty var data: T = _
   @BeanProperty var stackTrace: Array[String] = _
 }
