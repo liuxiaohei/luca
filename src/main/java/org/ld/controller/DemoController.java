@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 @Api(tags = {"事例API"})
 @RestController
+@SuppressWarnings("unused")
 public class DemoController {
 
     @ApiOperation(value = "事例", produces = "application/json")
