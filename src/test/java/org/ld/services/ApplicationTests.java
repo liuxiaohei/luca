@@ -18,7 +18,7 @@ public class ApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		System.out.println(JsonUtil.obj2String(userDao.selectByPrimaryKey(1)));
+		System.out.println(JsonUtil.obj2Json(userDao.selectByPrimaryKey(1)));
 	}
 
 }

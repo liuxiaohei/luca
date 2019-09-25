@@ -57,7 +57,7 @@ public class ControllerUtil {
             result.setStackTrace(sw.toString().split("\n\t"));
             result.setMessage(errMsg);
         }
-        LOG.info(() -> "Response Body : " + JsonUtil.obj2String(result));
+        LOG.info(() -> "Response Body : " + JsonUtil.obj2Json(result));
         return result;
     }
 

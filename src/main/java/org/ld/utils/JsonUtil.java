@@ -22,7 +22,7 @@ public class JsonUtil {
         return objectMapper.convertValue(jsonNode, type);
     }
 
-    public static String obj2String(Object obj) {
+    public static String obj2Json(Object obj) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(obj);

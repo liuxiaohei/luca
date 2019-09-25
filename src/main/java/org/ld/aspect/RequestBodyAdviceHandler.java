@@ -41,7 +41,7 @@ public class RequestBodyAdviceHandler implements RequestBodyAdvice {
             MethodParameter parameter,
             Type targetType,
             Class<? extends HttpMessageConverter<?>> converterType) {
-        LOG.info(() -> "RequestBody : " + JsonUtil.obj2String(body));
+        LOG.info(() -> "RequestBody : " + JsonUtil.obj2Json(body));
         return body;
     }
 

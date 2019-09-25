@@ -1,10 +1,11 @@
 package org.ld.utils;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import org.ld.exception.CodeException;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * http工具未完善
@@ -28,6 +29,44 @@ public class HttpUtil {
         conn.setDoOutput(true);
         conn.setUseCaches(false);
         return conn;
+    }
+
+    /**
+     * 指定url的post请求
+     */
+    public static String postReq(String u,Object params) {
+        try {
+            final URL url = new URL(u);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestProperty("Content-Type","application/json; charset=UTF-8");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            final PrintWriter printWriter = new PrintWriter(httpURLConnection.getOutputStream());
+            printWriter.write(JsonUtil.obj2Json(params));
+            printWriter.flush();
+            InputStream in = httpURLConnection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            return bufferedReader2json(reader);
+        } catch (Exception e) {
+            throw new CodeException(e);
+        }
+    }
+
+    /**
+     * I/O 将BufferedReader转化成json格式
+     */
+    private static String bufferedReader2json(BufferedReader bufferedReader) {
+        StringBuilder sb = new StringBuilder();
+        String line;
+        try {
+            while (Objects.nonNull(line = bufferedReader.readLine())) {
+                sb.append(line);
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 
     public OutputStream put(HttpURLConnection conn) throws IOException {
