@@ -72,7 +72,7 @@ public class Demo {
 
     @Test
     public void demo1() throws Exception {
-        String url = "jdbc:kundb://vt_app:123@172.26.5.34:15991/sharded_ks?useSSL=true&trustAllCA=true";
+        String url = "jdbc:kundb://vt_app:123@172.26.5.56:15991/sharded_ks?useSSL=true&trustAllCA=true";
         String user = "vt_app";
         String password = "123";
         String driverClass = "io.transwarp.kundb.jdbc.KundbDriver";
