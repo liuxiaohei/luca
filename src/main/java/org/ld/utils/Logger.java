@@ -4,6 +4,9 @@ import org.ld.exception.StackException;
 import org.ld.functions.UncheckedSupplier;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  */
 @SuppressWarnings("unused")
@@ -24,15 +27,21 @@ public class Logger {
         return new Logger(clazz);
     }
 
+
+    private static Map<String, Logger> cache = new ConcurrentHashMap<>();
+
     /**
      *
      */
     public static Logger newInstance() {
-        try {
-            return new Logger(ClassLoader.getSystemClassLoader().loadClass(Thread.currentThread().getStackTrace()[2].getClassName())); // 1 代表当前的栈帧 2 代表创建该线程的栈帧
-        } catch (Exception e) {
-            throw new StackException(e);
-        }
+        // 1 代表当前的栈帧 2 代表创建该线程的栈帧
+        return cache.computeIfAbsent(Thread.currentThread().getStackTrace()[2].getClassName(), className -> {
+            try {
+                return new Logger(ClassLoader.getSystemClassLoader().loadClass(className));
+            } catch (Exception e) {
+                throw new StackException(e);
+            }
+        });
     }
 
     public void debug(UncheckedSupplier<String> supplier) {

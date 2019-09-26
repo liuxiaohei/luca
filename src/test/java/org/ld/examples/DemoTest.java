@@ -37,7 +37,7 @@ public class DemoTest {
     public void infiniteStream() {
         Logger logger = Logger.newInstance();
         //Stream.iterate(0, i -> ++i).limit(1000).forEach(e -> Logger.newInstance().info(() -> "" + e));
-        Stream.generate(UuidUtils::getShortUuid).limit(1000000).forEach(e -> logger.info(() -> "" + e));
+        Stream.generate(UuidUtils::getShortUuid).limit(1000000).forEach(e -> Logger.newInstance().info(() -> "" + e));
     }
 
 //    @Test
