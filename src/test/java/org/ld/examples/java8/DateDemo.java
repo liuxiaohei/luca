@@ -1,10 +1,12 @@
 package org.ld.examples.java8;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class DateDemo {
 
@@ -114,15 +116,62 @@ public class DateDemo {
         System.out.println(datetime);
     }
 
+    @Test
+    public void demo11() {
+        //获取秒数
+        Long second = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+        System.out.println(second);
+        //获取毫秒数
+        Long milliSecond = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println(milliSecond);
+
+
+        //时间转字符串格式化
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        String dateTime = LocalDateTime.now(ZoneOffset.of("+8")).format(formatter);
+        System.out.println(dateTime);
+
+        //字符串转时间
+        String dateTimeStr = "2018-07-28 14:11:15";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime1 = LocalDateTime.parse(dateTimeStr, df);
+        System.out.println(dateTime1);
+    }
+
+    //将java.util.Date 转换为java8 的java.time.LocalDateTime,默认时区为东8区
+    public static LocalDateTime dateConvertToLocalDateTime(Date date) {
+        return date.toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+    }
+
+
+    //将java8 的 java.time.LocalDateTime 转换为 java.util.Date，默认时区为东8区
+    public static Date localDateTimeConvertToDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.toInstant(ZoneOffset.of("+8")));
+    }
+
+
+    /**
+     * 测试转换是否正确
+     */
+    @Test
+    public void testDateConvertToLocalDateTime() {
+        Date date = new Date();
+        LocalDateTime localDateTime = dateConvertToLocalDateTime(date);
+        Long localDateTimeSecond = localDateTime.toEpochSecond(ZoneOffset.of("+8"));
+        Long dateSecond = date.toInstant().atOffset(ZoneOffset.of("+8")).toEpochSecond();
+        Assert.assertTrue(dateSecond.equals(localDateTimeSecond));
+    }
+
+
     // 相关类说明
-//    Instant         时间戳
-//    Duration        持续时间、时间差
-//    LocalDate       只包含日期，比如：2018-09-24
-//    LocalTime       只包含时间，比如：10:32:10
-//    LocalDateTime   包含日期和时间，比如：2018-09-24 10:32:10
-//    Peroid          时间段
-//    ZoneOffset      时区偏移量，比如：+8:00
-//    ZonedDateTime   带时区的日期时间
-//    Clock           时钟，可用于获取当前时间戳
-//    java.time.format.DateTimeFormatter      时间格式化类
+    //    Instant         时间戳
+    //    Duration        持续时间、时间差
+    //    LocalDate       只包含日期，比如：2018-09-24
+    //    LocalTime       只包含时间，比如：10:32:10
+    //    LocalDateTime   包含日期和时间，比如：2018-09-24 10:32:10
+    //    Peroid          时间段
+    //    ZoneOffset      时区偏移量，比如：+8:00
+    //    ZonedDateTime   带时区的日期时间
+    //    Clock           时钟，可用于获取当前时间戳
+    //    java.time.format.DateTimeFormatter      时间格式化类
 }
