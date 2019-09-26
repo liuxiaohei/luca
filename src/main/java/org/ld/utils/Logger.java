@@ -1,6 +1,6 @@
 package org.ld.utils;
 
-import org.ld.exception.CodeException;
+import org.ld.exception.StackException;
 import org.ld.functions.UncheckedSupplier;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class Logger {
         try {
             return new Logger(ClassLoader.getSystemClassLoader().loadClass(Thread.currentThread().getStackTrace()[2].getClassName())); // 1 代表当前的栈帧 2 代表创建该线程的栈帧
         } catch (Exception e) {
-            throw new CodeException(e);
+            throw new StackException(e);
         }
     }
 

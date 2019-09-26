@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.ld.exception.CodeException;
+import org.ld.exception.StackException;
 
 import java.io.IOException;
 import java.util.*;
@@ -27,7 +27,7 @@ public class JsonUtil {
         try {
             return mapper.writeValueAsString(obj);
         } catch (Exception e) {
-            throw new CodeException(e);
+            throw new StackException(e);
         }
     }
 
@@ -44,7 +44,7 @@ public class JsonUtil {
             return new ObjectMapper().readValue(json, new TypeReference<Map<String, String>>() {
             });
         } catch (IOException e) {
-            throw new CodeException(e);
+            throw new StackException(e);
         }
     }
 
@@ -53,7 +53,7 @@ public class JsonUtil {
         try {
             return new ObjectMapper().readTree(expression);
         } catch (IOException e) {
-            throw new CodeException(e);
+            throw new StackException(e);
         }
     }
 }

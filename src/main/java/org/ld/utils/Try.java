@@ -1,6 +1,6 @@
 package org.ld.utils;
 
-import org.ld.exception.CodeException;
+import org.ld.exception.StackException;
 import org.ld.functions.UncheckedFunction;
 import org.ld.functions.UncheckedSupplier;
 
@@ -27,7 +27,7 @@ public class Try {
             try {
                 return mapper.apply(t);
             } catch (Throwable ex) {
-                throw new CodeException(ex);
+                throw new StackException(ex);
             }
         };
     }
@@ -38,7 +38,7 @@ public class Try {
             try {
                 return uncheckedSupplier.get();
             } catch (Throwable ex) {
-                throw new CodeException(ex);
+                throw new StackException(ex);
             }
         };
     }

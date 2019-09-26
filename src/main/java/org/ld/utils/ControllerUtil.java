@@ -2,7 +2,7 @@ package org.ld.utils;
 
 import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.SystemErrorCodeEnum;
-import org.ld.exception.CodeException;
+import org.ld.exception.StackException;
 import org.ld.exception.ErrorCode;
 import org.ld.functions.UncheckedSupplier;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -29,7 +29,7 @@ public class ControllerUtil {
             result.setMessage(SystemErrorCodeEnum.SUCCESS().toString());
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
-                throw new CodeException(e);
+                throw new StackException(e);
             }
             LOG.printStackTrace(e);
             if (e instanceof OutOfMemoryError) {
@@ -37,18 +37,18 @@ public class ControllerUtil {
                 System.exit(0);
                 return null;
             }
-            final CodeException se = Optional.ofNullable(findException(e))
+            final StackException se = Optional.ofNullable(findException(e))
                     .orElseGet(() -> ErrorCode.getSystemErrorValue(e)
                             .map(ErrorCode::new)
-                            .map(CodeException::new)
-                            .orElseGet(() -> new CodeException(new ErrorCode(SystemErrorCodeEnum.UNKNOW()))));
+                            .map(StackException::new)
+                            .orElseGet(() -> new StackException(new ErrorCode(SystemErrorCodeEnum.UNKNOW()))));
             final String errMsg = Optional.of(se)
-                    .map(CodeException::getValue)
+                    .map(StackException::getValue)
                     .filter(value -> !value.equals(SystemErrorCodeEnum.UNKNOW()))
                     .map(Enumeration.Value::toString)
                     .orElseGet(e::getMessage);
             Optional.of(se)
-                    .map(CodeException::getValue)
+                    .map(StackException::getValue)
                     .map(Enumeration.Value::id)
                     .ifPresent(result::setState);
             StringWriter sw = new StringWriter();
@@ -64,9 +64,9 @@ public class ControllerUtil {
     /**
      * 找到第一个CodeException
      */
-    private static CodeException findException(Throwable t) {
+    private static StackException findException(Throwable t) {
         if (t == null) return null;
-        if (t instanceof CodeException) return (CodeException) t;
+        if (t instanceof StackException) return (StackException) t;
         return findException(t.getCause());
     }
 }
