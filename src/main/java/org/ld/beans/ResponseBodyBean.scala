@@ -7,7 +7,7 @@ import scala.beans.BeanProperty
  * ResponseBody bean 实体
  */
 class ResponseBodyBean[T] {
-  @BeanProperty var state: Integer = _
+  @BeanProperty var errorCode: Integer = _
   @BeanProperty var message: String = _
   @BeanProperty var data: T = _
   @BeanProperty var stackTrace: Array[String] = _

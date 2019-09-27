@@ -6,6 +6,8 @@ import org.ld.exception.StackException;
 import org.ld.exception.ErrorCode;
 import org.ld.functions.UncheckedSupplier;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import scala.Enumeration;
 
@@ -21,12 +23,14 @@ public class ControllerUtil {
      * 转换响应结构体
      */
     public static Object convertResponseBody(UncheckedSupplier point) {
+        ResponseEntity<Object> responseEntity;
         ResponseBodyBean<Object> result = new ResponseBodyBean<>();
         try {
             final Object body = point.get();
             result.setData(body);
-            result.setState(SystemErrorCodeEnum.SUCCESS().id());
+            result.setErrorCode(SystemErrorCodeEnum.SUCCESS().id());
             result.setMessage(SystemErrorCodeEnum.SUCCESS().toString());
+            responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
                 throw new StackException(e);
@@ -50,15 +54,16 @@ public class ControllerUtil {
             Optional.of(se)
                     .map(StackException::getValue)
                     .map(Enumeration.Value::id)
-                    .ifPresent(result::setState);
+                    .ifPresent(result::setErrorCode);
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
             result.setStackTrace(sw.toString().split("\n\t"));
             result.setMessage(errMsg);
+            responseEntity = new ResponseEntity<>(result,HttpStatus.INTERNAL_SERVER_ERROR);
         }
         LOG.info(() -> "Response Body : " + JsonUtil.obj2Json(result));
-        return result;
+        return responseEntity;
     }
 
     /**
