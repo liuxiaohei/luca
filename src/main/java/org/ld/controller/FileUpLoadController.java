@@ -24,9 +24,7 @@ public class FileUpLoadController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public Object upload(@RequestParam MultipartFile file) throws IOException {
         final String fileName = file.getOriginalFilename();
-        final String suffix = Optional.ofNullable(fileName)
-                .filter(e -> e.contains("."))
-                .map(e -> e.substring(e.lastIndexOf(".") + 1)).orElse("");
+        final String suffix = Optional.ofNullable(fileName).filter(e -> e.contains(".")).map(e -> e.substring(e.lastIndexOf(".") + 1)).orElse("");
         final String key = UuidUtils.getShortUuid() + "_" + (file.getSize() / 1024) + Optional.of(suffix).map(e -> "." + e).orElse("");
         final InputStream inputStream = file.getInputStream();
         return null;
