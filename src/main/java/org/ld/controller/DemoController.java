@@ -2,6 +2,7 @@ package org.ld.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class DemoController {
 
-    @ApiOperation(value = "事例", produces = "application/json")
+    @ApiOperation(value = "事例", produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value = "demo")
     public Object demo() {
         Map<String, Object> a = new HashMap<>();
@@ -27,7 +28,7 @@ public class DemoController {
         return a;
     }
 
-    @ApiOperation(value = "错误事例", produces = "application/json")
+    @ApiOperation(value = "错误事例", produces = MediaType.APPLICATION_JSON_VALUE)
     @GetMapping(value = "errordemo")
     public Object errorDemo() {
         Map<String, Object> a = new HashMap<>();
