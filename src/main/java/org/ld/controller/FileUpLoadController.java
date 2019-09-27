@@ -19,7 +19,7 @@ import java.util.Optional;
 public class FileUpLoadController {
 
     /**
-     * 上传app文件至阿里云
+     * 上传文件
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public Object upload(@RequestParam MultipartFile file) throws IOException {

@@ -83,6 +83,10 @@
                     <artifactId>springfox-spring-web</artifactId>
                     <groupId>io.springfox</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -94,7 +98,17 @@
                     <artifactId>reflections</artifactId>
                     <groupId>org.reflections</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
         </dependency>
 
     </dependencies>
