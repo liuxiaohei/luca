@@ -1,6 +1,5 @@
 package org.ld.controller;
 
-import com.aliyun.oss.OSSClient;
 import org.ld.utils.UuidUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
