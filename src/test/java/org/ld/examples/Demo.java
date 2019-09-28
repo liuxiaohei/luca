@@ -2,7 +2,7 @@ package org.ld.examples;
 
 import org.junit.Test;
 import org.ld.classloader.DemoInterface;
-import org.ld.exception.StackException;
+import org.ld.exception.CodeStackException;
 import org.ld.utils.Logger;
 
 import java.io.File;
@@ -137,9 +137,33 @@ public class Demo {
                         logger.debug(() -> "MaxMemory" + i + Runtime.getRuntime().maxMemory() / (1024 * 1024) + "M");
                         logger.debug(() -> "UsedMemory" + i + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024) + "M");
                     } catch (Exception e1) {
-                        throw new StackException(e1);
+                        throw new CodeStackException(e1);
                     }
 
                 });
+    }
+
+    private String aaa (Integer a) {
+        try {
+             return (100/a) + "";
+        } catch (Exception e) {
+            throw new CodeStackException(e);
+        }
+    }
+
+    private String bbb (Integer a) {
+        try {
+            return aaa(a);
+        } catch (Exception e) {
+            throw new CodeStackException(e);
+        }
+    }
+
+    @Test
+    public void demo3() {
+        System.out.println(bbb(3));
+        System.out.println(bbb(2));
+        System.out.println(bbb(1));
+        System.out.println(bbb(0));
     }
 }

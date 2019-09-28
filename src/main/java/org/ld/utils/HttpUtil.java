@@ -1,6 +1,6 @@
 package org.ld.utils;
 
-import org.ld.exception.StackException;
+import org.ld.exception.CodeStackException;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -49,7 +49,7 @@ public class HttpUtil {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             return bufferedReader2json(reader);
         } catch (Exception e) {
-            throw new StackException(e);
+            throw new CodeStackException(e);
         }
     }
 

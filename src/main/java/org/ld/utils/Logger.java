@@ -1,6 +1,6 @@
 package org.ld.utils;
 
-import org.ld.exception.StackException;
+import org.ld.exception.CodeStackException;
 import org.ld.functions.UncheckedSupplier;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +39,7 @@ public class Logger {
             try {
                 return new Logger(ClassLoader.getSystemClassLoader().loadClass(className));
             } catch (Exception e) {
-                throw new StackException(e);
+                throw new CodeStackException(e);
             }
         });
     }

@@ -5,16 +5,16 @@ import org.ld.enums.SystemErrorCodeEnum;
 import scala.Enumeration;
 
 @SuppressWarnings("unused")
-public class StackException extends RuntimeException {
+public class CodeStackException extends RuntimeException {
 
     private ErrorCode errorCode;
 
-    public StackException(ErrorCode errorCode) {
+    public CodeStackException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
     }
 
-    public StackException(Throwable e) {
+    public CodeStackException(Throwable e) {
         super(e.getMessage(), e);
         super.setStackTrace(e.getStackTrace());
         this.errorCode = new ErrorCode(ErrorCode.getSystemErrorValue(e).orElseGet(SystemErrorCodeEnum::UNKNOW));
@@ -25,14 +25,14 @@ public class StackException extends RuntimeException {
     }
 
     public static void throwException(ErrorCode info) {
-        throw new StackException(info);
+        throw new CodeStackException(info);
     }
 
     public static void throwException(Enumeration.Value value) {
-        throw new StackException(new ErrorCode(value));
+        throw new CodeStackException(new ErrorCode(value));
     }
 
     public static void throwException(Throwable e) {
-        throw new StackException(e);
+        throw new CodeStackException(e);
     }
 }

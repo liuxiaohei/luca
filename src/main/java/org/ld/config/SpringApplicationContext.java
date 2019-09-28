@@ -1,6 +1,6 @@
 package org.ld.config;
 
-import org.ld.exception.StackException;
+import org.ld.exception.CodeStackException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,7 +18,7 @@ public class SpringApplicationContext implements ApplicationContextAware {
         try {
             return applicationContext.getBean(clazz);
         } catch (BeansException e) {
-            throw new StackException(e);
+            throw new CodeStackException(e);
         }
     }
 

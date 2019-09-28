@@ -50,8 +50,8 @@ public class ErrorCode {
     }
 
     public static Optional<Enumeration.Value> getSystemErrorValue(Throwable e) {
-        if (e instanceof StackException) {
-            return Optional.of((StackException) e).map(StackException::getValue);
+        if (e instanceof CodeStackException) {
+            return Optional.of((CodeStackException) e).map(CodeStackException::getValue);
         }
         return EXCEPTIONS.entrySet()
                 .stream()
