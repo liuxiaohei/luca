@@ -2,6 +2,7 @@ package org.ld.exception;
 
 
 import org.ld.enums.SystemErrorCodeEnum;
+import org.ld.utils.ExceptionUtil;
 import scala.Enumeration;
 
 @SuppressWarnings("unused")
@@ -17,7 +18,7 @@ public class CodeStackException extends RuntimeException {
     public CodeStackException(Throwable e) {
         super(e.getMessage(), e);
         super.setStackTrace(e.getStackTrace());
-        this.errorCode = new ErrorCode(ErrorCode.getSystemErrorValue(e).orElseGet(SystemErrorCodeEnum::UNKNOW));
+        this.errorCode = new ErrorCode(ExceptionUtil.getSystemErrorValue(e).orElseGet(SystemErrorCodeEnum::UNKNOW));
     }
 
     public Enumeration.Value getValue() {

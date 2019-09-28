@@ -42,7 +42,7 @@ public class ControllerUtil {
                 return null;
             }
             final CodeStackException se = Optional.ofNullable(findException(e))
-                    .orElseGet(() -> ErrorCode.getSystemErrorValue(e)
+                    .orElseGet(() -> ExceptionUtil.getSystemErrorValue(e)
                             .map(ErrorCode::new)
                             .map(CodeStackException::new)
                             .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOW()))));
