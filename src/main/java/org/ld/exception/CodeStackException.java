@@ -3,10 +3,13 @@ package org.ld.exception;
 
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.utils.ExceptionUtil;
+import org.ld.utils.Logger;
 import scala.Enumeration;
 
 @SuppressWarnings("unused")
 public class CodeStackException extends RuntimeException {
+
+    private static Logger logger = Logger.newInstance();
 
     private ErrorCode errorCode;
 

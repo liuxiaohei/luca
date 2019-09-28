@@ -30,6 +30,7 @@ public class ControllerUtil {
             result.setData(body);
             result.setErrorCode(SystemErrorCodeEnum.SUCCESS().id());
             result.setMessage(SystemErrorCodeEnum.SUCCESS().toString());
+            LOG.info(() -> "Response Body : " + JsonUtil.obj2Json(result));
             responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
         } catch (Throwable e) {
             if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null) {
@@ -62,7 +63,6 @@ public class ControllerUtil {
             result.setMessage(errMsg);
             responseEntity = new ResponseEntity<>(result,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        LOG.info(() -> "Response Body : " + JsonUtil.obj2Json(result));
         return responseEntity;
     }
 
