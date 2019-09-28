@@ -1,13 +1,14 @@
 package org.ld.utils;
 
 import org.ld.exception.CodeStackException;
-import org.ld.functions.UncheckedFunction;
-import org.ld.functions.UncheckedSupplier;
+import org.ld.functions.*;
 
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -32,17 +33,6 @@ public class Try {
         };
     }
 
-    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier) {
-        Objects.requireNonNull(uncheckedSupplier);
-        return () -> {
-            try {
-                return uncheckedSupplier.get();
-            } catch (Throwable ex) {
-                throw new CodeStackException(ex);
-            }
-        };
-    }
-
     /**
      * 屏蔽受检异常 并给出默认值默认值
      */
@@ -56,4 +46,71 @@ public class Try {
             }
         };
     }
+
+    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier) {
+        Objects.requireNonNull(uncheckedSupplier);
+        return () -> {
+            try {
+                return uncheckedSupplier.get();
+            } catch (Throwable ex) {
+                throw new CodeStackException(ex);
+            }
+        };
+    }
+
+    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier,Supplier<T> defaultValue) {
+        Objects.requireNonNull(uncheckedSupplier);
+        return () -> {
+            try {
+                return uncheckedSupplier.get();
+            } catch (Throwable ex) {
+                return Optional.ofNullable(defaultValue).map(Supplier::get).orElse(null);
+            }
+        };
+    }
+
+    public static <T> Predicate<T> of(UncheckedPredicate<T> uncheckedPredicate) {
+        Objects.requireNonNull(uncheckedPredicate);
+        return t -> {
+            try {
+                return uncheckedPredicate.test(t);
+            } catch (Throwable ex) {
+                throw new CodeStackException(ex);
+            }
+        };
+    }
+
+    public static <T> Predicate<T> of(UncheckedPredicate<T> uncheckedPredicate,boolean defaultValue) {
+        Objects.requireNonNull(uncheckedPredicate);
+        return t -> {
+            try {
+                return uncheckedPredicate.test(t);
+            } catch (Throwable ex) {
+                return defaultValue;
+            }
+        };
+    }
+
+    public static <T> Consumer<T> of(UncheckedConsumer<T> uncheckedConsumer) {
+        Objects.requireNonNull(uncheckedConsumer);
+        return t -> {
+            try {
+                uncheckedConsumer.accept(t);
+            } catch (Throwable ex) {
+                throw new CodeStackException(ex);
+            }
+        };
+    }
+
+    public static Runnable of(UncheckedRunnable uncheckedRunnable) {
+        Objects.requireNonNull(uncheckedRunnable);
+        return () -> {
+            try {
+                uncheckedRunnable.run();
+            } catch (Throwable ex) {
+                throw new CodeStackException(ex);
+            }
+        };
+    }
+
 }
