@@ -21,7 +21,13 @@ public class CodeStackException extends RuntimeException {
     public CodeStackException(Throwable e) {
         super(e.getMessage(), e);
         super.setStackTrace(e.getStackTrace());
-        this.errorCode = new ErrorCode(ExceptionUtil.getSystemErrorValue(e).orElseGet(SystemErrorCodeEnum::UNKNOW));
+        this.errorCode = new ErrorCode(ExceptionUtil.getSystemErrorValue(e)
+                .filter(code -> !(e instanceof CodeStackException))
+                .filter(code -> {
+                    logger.info(() -> "ErrorCode:" + code.id() + " Reason:" + code.toString());
+                    return true;
+                })
+                .orElseGet(SystemErrorCodeEnum::UNKNOW));
     }
 
     public Enumeration.Value getValue() {

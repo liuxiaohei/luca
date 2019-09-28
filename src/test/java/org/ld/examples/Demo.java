@@ -161,9 +161,13 @@ public class Demo {
 
     @Test
     public void demo3() {
-        System.out.println(bbb(3));
-        System.out.println(bbb(2));
-        System.out.println(bbb(1));
-        System.out.println(bbb(0));
+        try {
+            System.out.println(bbb(3));
+            System.out.println(bbb(2));
+            System.out.println(bbb(1));
+            System.out.println(bbb(0));
+        } catch (Exception e) {
+            logger.printStackTrace(e);
+        }
     }
 }

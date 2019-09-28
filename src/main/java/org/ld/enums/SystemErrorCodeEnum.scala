@@ -16,7 +16,7 @@ object SystemErrorCodeEnum extends Enumeration {
   val CLASS_CAST_EXCEPTION = Value(6, "类转换异常，将一个不是该类的实例转换成这个类就会抛出这个异常")
   val NO_SUCH_METHOD_EXCEPTION = Value(7, "没有这个方法异常，一般发生在反射调用方法的时候")
   val INDEX_OUTOFBOUNDS_EXCEPTION = Value(8, "索引越界异常，当操作一个字符串或者数组的时候经常遇到的异常")
-  val ARITHMETIC_EXCEPTION = Value(9, "算术异常，发生在数字的算术运算时的异常，如一个数字除以 0 就会报这个错。")
+  val ARITHMETIC_EXCEPTION = Value(9, "算术异常，发生在数字的算术运算时的异常，如一个数字除以 0。")
   val SQL_EXCEPTION = Value(10, "数据库访问失败")
   val DATA_ACCESS_FAILED = Value(11, "数据访问失败")
   val UNSUPPORTED_OPERATION_EXCEPTION = Value(12, "不支持的方法异常。指明请求的方法不被支持情况的异常")
