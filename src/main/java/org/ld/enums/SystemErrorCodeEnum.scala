@@ -55,7 +55,6 @@ object SystemErrorCodeEnum extends Enumeration {
   val ASSERTION_ERROR = Value(45, "断言错。用来指示一个断言失败的情况。")
   val ABSTRACT_METHOD_ERROR = Value(46, "抽象方法错误。当应用试图调用抽象方法时抛出。")
 
-
   val SUCCESS = Value(1000, "操作成功")
   val PARAMS_INVALID = Value(10000, "参数错误")
 

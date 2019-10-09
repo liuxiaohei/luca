@@ -100,56 +100,56 @@ public class Demo {
         con.close();
     }
 
-    Logger logger = Logger.newInstance();
+    private Logger logger = Logger.newInstance();
 
     @Test
     public void demo2() throws Exception {
         String driverClass = "org.ld.classloader.DemoBean";
         String driverJar = "http://node2602:50070/webhdfs/v1/tmp/ld/lddemo-studio-1.2.0.jar?op=OPEN&offset=0&buffersize=10485760&guardian_access_token=8BMmYlZADdotfCD2PoYH-TDH";
-        URL urls[] = new URL[]{new URL(driverJar)};
+        URL[] urls = new URL[]{new URL(driverJar)};
         URLClassLoader loader = new URLClassLoader(urls);
         Class<?> clazz = loader.loadClass(driverClass);
         Stream.iterate(0, i -> ++i)
                 .limit(1)
                 .forEach(
-                i -> {
-                    try {
+                        i -> {
+                            try {
 
-                        DemoInterface demo = (DemoInterface) clazz.newInstance();
-                        demo.set("abc");
-                        demo.say();
-                        System.out.println(demo.get());
-                        System.out.println(demo.name());
+                                DemoInterface demo = (DemoInterface) clazz.newInstance();
+                                demo.set("abc");
+                                demo.say();
+                                System.out.println(demo.get());
+                                System.out.println(demo.name());
 
 
-                        //driverJar = "http://node2602:50070/webhdfs/v1/tmp/ld/lddemo-studio-1.2.1.jar?op=OPEN&offset=0&buffersize=10485760&guardian_access_token=8BMmYlZADdotfCD2PoYH-TDH";
-                        //urls = new URL[]{new URL(driverJar)};
-                        //loader = new URLClassLoader(urls);
-                        demo = (DemoInterface) ClassLoader.getSystemClassLoader().loadClass(driverClass).newInstance();
-                        demo.set("def");
-                        demo.say();
-                        System.out.println(demo.get());
-                        System.out.println(demo.name());
-                        logger.debug(() -> "TotalMemory" + i + Runtime.getRuntime().totalMemory() / (1024 * 1024) + "M");
-                        logger.debug(() -> "FreeMemory" + i + Runtime.getRuntime().freeMemory() / (1024 * 1024) + "M");
-                        logger.debug(() -> "MaxMemory" + i + Runtime.getRuntime().maxMemory() / (1024 * 1024) + "M");
-                        logger.debug(() -> "UsedMemory" + i + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024) + "M");
-                    } catch (Exception e1) {
-                        throw new CodeStackException(e1);
-                    }
+                                //driverJar = "http://node2602:50070/webhdfs/v1/tmp/ld/lddemo-studio-1.2.1.jar?op=OPEN&offset=0&buffersize=10485760&guardian_access_token=8BMmYlZADdotfCD2PoYH-TDH";
+                                //urls = new URL[]{new URL(driverJar)};
+                                //loader = new URLClassLoader(urls);
+                                demo = (DemoInterface) ClassLoader.getSystemClassLoader().loadClass(driverClass).newInstance();
+                                demo.set("def");
+                                demo.say();
+                                System.out.println(demo.get());
+                                System.out.println(demo.name());
+                                logger.debug(() -> "TotalMemory" + i + Runtime.getRuntime().totalMemory() / (1024 * 1024) + "M");
+                                logger.debug(() -> "FreeMemory" + i + Runtime.getRuntime().freeMemory() / (1024 * 1024) + "M");
+                                logger.debug(() -> "MaxMemory" + i + Runtime.getRuntime().maxMemory() / (1024 * 1024) + "M");
+                                logger.debug(() -> "UsedMemory" + i + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024) + "M");
+                            } catch (Exception e1) {
+                                throw new CodeStackException(e1);
+                            }
 
-                });
+                        });
     }
 
-    private String aaa (Integer a) {
+    private String aaa(Integer a) {
         try {
-             return (100/a) + "";
+            return (100 / a) + "";
         } catch (Exception e) {
             throw new CodeStackException(e);
         }
     }
 
-    private String bbb (Integer a) {
+    private String bbb(Integer a) {
         try {
             return aaa(a);
         } catch (Exception e) {
