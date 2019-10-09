@@ -30,7 +30,7 @@ public class CodeStackException extends RuntimeException {
                     logger.info(() -> "ErrorCode:" + code.id() + " Reason:" + code.toString());
                     return true;
                 })
-                .orElseGet(SystemErrorCodeEnum::UNKNOW));
+                .orElseGet(SystemErrorCodeEnum::UNKNOWN));
     }
 
     public Enumeration.Value getValue() {

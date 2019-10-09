@@ -35,12 +35,12 @@ public class ControllerUtil {
                     .orElseGet(() -> ExceptionUtil.getSystemErrorValue(e)
                             .map(ErrorCode::new)
                             .map(CodeStackException::new)
-                            .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOW()))));
+                            .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOWN()))));
             ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setErrorCode(Optional.of(se)
                     .map(CodeStackException::getValue)
                     .map(Enumeration.Value::id)
-                    .orElseGet(SystemErrorCodeEnum.UNKNOW()::id));
+                    .orElseGet(SystemErrorCodeEnum.UNKNOWN()::id));
             result.setStackTrace(Optional.of(e)
                     .map(error -> {
                         final StringWriter sw = new StringWriter();
@@ -52,7 +52,7 @@ public class ControllerUtil {
                     }).orElse(null));
             result.setMessage(Optional.of(se)
                     .map(CodeStackException::getValue)
-                    .filter(value -> !value.equals(SystemErrorCodeEnum.UNKNOW()))
+                    .filter(value -> !value.equals(SystemErrorCodeEnum.UNKNOWN()))
                     .map(Enumeration.Value::toString)
                     .orElseGet(e::getMessage));
             return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);

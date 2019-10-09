@@ -6,7 +6,7 @@ package org.ld.enums
  * https://www.cnblogs.com/qlqwjy/p/7816290.html
  */
 object SystemErrorCodeEnum extends Enumeration {
-  val UNKNOW = Value(-1, "未知异常")
+  val UNKNOWN = Value(-1, "未知异常")
   val NULL_POINTER_EXCEPTION = Value(1, "空指针异常")
   val OUT_OF_MEMORY_ERROR = Value(2, "内存溢出异常")
   val IO_EXCEPTION = Value(3, "IO异常")
