@@ -5,7 +5,6 @@ package org.ld.enums
  * 系统级ErrorCode
  * https://www.cnblogs.com/qlqwjy/p/7816290.html
  */
-@SuppressWarnings(Array("all"))
 object SystemErrorCodeEnum extends Enumeration {
   val UNKNOW = Value(-1, "未知异常")
   val NULL_POINTER_EXCEPTION = Value(1, "空指针异常")
@@ -32,9 +31,9 @@ object SystemErrorCodeEnum extends Enumeration {
   val ILLEGAL_STATE_EXCEPTION = Value(22, "违法的状态异常。当在Java环境和应用尚未处于某个方法的合法调用状态，而调用了该方法时，抛出该异常。")
   val ILLEGAL_MONITOR_STATE_EXCEPTION = Value(23, "违法的监控状态异常。当某个线程试图等待一个自己并不拥有的对象（O）的监控器或者通知其他线程等待该对象（O）的监控器时，抛出该异常。")
   val ILLEGAL_ACCESS_EXCEPTION = Value(24, "违法的访问异常。当应用试图通过反射方式创建某个类的实例、访问该类属性、调用该类方法，而当时又无法访问类的、属性的、方法的或构造方法的定义时抛出该异常。")
-  val ENUM_CONSTANT_NOT_PRESENT_EXCEPTION = Value(25, "枚举常量不存在异常。当应用试图通过名称和枚举类型访问一个枚举对象，但该枚举对象并不包含常量时，抛出该异常。");
+  val ENUM_CONSTANT_NOT_PRESENT_EXCEPTION = Value(25, "枚举常量不存在异常。当应用试图通过名称和枚举类型访问一个枚举对象，但该枚举对象并不包含常量时，抛出该异常。")
   val CLONE_NOT_SUPPORTED_EXCEPTION = Value(26, "不支持克隆异常。当没有实现Cloneable接口或者不支持克隆方法时,调用其clone()方法则抛出该异常。")
-  val ARRAY_STORE_EXCEPTION = Value(27, "数组存储异常。当向数组中存放非数组声明类型对象时抛出。");
+  val ARRAY_STORE_EXCEPTION = Value(27, "数组存储异常。当向数组中存放非数组声明类型对象时抛出。")
   val VIRTUAL_MACHINE_ERROR = Value(28, "虚拟机错误。用于指示虚拟机被破坏或者继续执行操作所需的资源不足的情况。")
   val VERIFY_ERROR = Value(29, "验证错误。当验证器检测到某个类文件中存在内部不兼容或者安全问题时抛出该错误。")
   val UNSUPPORTED_CLASS_VERSION_ERROR = Value(30, "不支持的类版本错误。当Java虚拟机试图从读取某个类文件，但是发现该文件的主、次版本号不被当前Java虚拟机支持的时候，抛出该错误。")
@@ -56,6 +55,7 @@ object SystemErrorCodeEnum extends Enumeration {
   val ABSTRACT_METHOD_ERROR = Value(46, "抽象方法错误。当应用试图调用抽象方法时抛出。")
 
   val SUCCESS = Value(1000, "操作成功")
+
   val PARAMS_INVALID = Value(10000, "参数错误")
 
 }
