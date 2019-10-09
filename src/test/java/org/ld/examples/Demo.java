@@ -109,9 +109,8 @@ public class Demo {
         URL urls[] = new URL[]{new URL(driverJar)};
         URLClassLoader loader = new URLClassLoader(urls);
         Class<?> clazz = loader.loadClass(driverClass);
-
         Stream.iterate(0, i -> ++i)
-                .limit(5000000)
+                .limit(1)
                 .forEach(
                 i -> {
                     try {
@@ -123,15 +122,14 @@ public class Demo {
                         System.out.println(demo.name());
 
 
-//                        driverJar = "http://node2602:50070/webhdfs/v1/tmp/ld/lddemo-studio-1.2.1.jar?op=OPEN&offset=0&buffersize=10485760&guardian_access_token=8BMmYlZADdotfCD2PoYH-TDH";
-//                        urls = new URL[]{new URL(driverJar)};
-//                        loader = new URLClassLoader(urls);
-//                        clazz = loader.loadClass(driverClass);
-//                        demo = (DemoInterface) clazz.newInstance();
-//                        demo.set("def");
-//                        demo.say();
-//                        System.out.println(demo.get());
-//                        System.out.println(demo.name());
+                        //driverJar = "http://node2602:50070/webhdfs/v1/tmp/ld/lddemo-studio-1.2.1.jar?op=OPEN&offset=0&buffersize=10485760&guardian_access_token=8BMmYlZADdotfCD2PoYH-TDH";
+                        //urls = new URL[]{new URL(driverJar)};
+                        //loader = new URLClassLoader(urls);
+                        demo = (DemoInterface) ClassLoader.getSystemClassLoader().loadClass(driverClass).newInstance();
+                        demo.set("def");
+                        demo.say();
+                        System.out.println(demo.get());
+                        System.out.println(demo.name());
                         logger.debug(() -> "TotalMemory" + i + Runtime.getRuntime().totalMemory() / (1024 * 1024) + "M");
                         logger.debug(() -> "FreeMemory" + i + Runtime.getRuntime().freeMemory() / (1024 * 1024) + "M");
                         logger.debug(() -> "MaxMemory" + i + Runtime.getRuntime().maxMemory() / (1024 * 1024) + "M");
