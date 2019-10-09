@@ -17,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import javax.servlet.MultipartConfigElement;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 
 /**
  * 获取配置中心的自定义配置信息
@@ -44,16 +45,17 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
+        final BiFunction<Integer, String, ResponseMessage> re = (code, message) -> new ResponseMessageBuilder().code(code).message(message).responseModel(new ModelRef("ApiError")).build();
         final List<ResponseMessage> responseMessages = Arrays.asList(
-                new ResponseMessageBuilder().code(200).message("操作成功").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(400).message("登录参数错误").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(401).message("用户名或密码错误").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(403).message("用户被禁止").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(404).message("找不到资源").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(409).message("业务逻辑异常").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(422).message("参数校验异常").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(500).message("服务器内部错误").responseModel(new ModelRef("ApiError")).build(),
-                new ResponseMessageBuilder().code(503).message("Hystrix异常").responseModel(new ModelRef("ApiError")).build());
+                re.apply(200, "操作成功"),
+                re.apply(400, "登录参数错误"),
+                re.apply(401, "用户名或密码错误"),
+                re.apply(403, "用户被禁止"),
+                re.apply(404, "找不到资源"),
+                re.apply(409, "业务逻辑异常"),
+                re.apply(422, "参数校验异常"),
+                re.apply(500, "服务器内部错误"),
+                re.apply(503, "Hystrix异常"));
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)
