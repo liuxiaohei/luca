@@ -1,20 +1,18 @@
 package org.ld.actors;
 
 import akka.actor.*;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
-
+import org.ld.utils.Logger;
 
 
 public class Counter extends AbstractActor {
 
-    private LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
+    private static Logger log = Logger.newInstance();
 
     @Override
     public Receive createReceive() {
         return receiveBuilder()
                 .match(String.class, e -> getSender().tell("成功收到用户消息!", ActorRef.noSender()))
-                .matchAny(messages -> System.out.println("received"))
+                .matchAny(messages -> log.info(messages::toString))
                 .build();
     }
 
