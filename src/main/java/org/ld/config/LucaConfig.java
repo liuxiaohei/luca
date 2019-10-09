@@ -5,6 +5,7 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
+import scala.collection.JavaConverters;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
@@ -16,8 +17,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.MultipartConfigElement;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 获取配置中心的自定义配置信息
@@ -45,11 +46,12 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
-        final List<ResponseMessage> responseMessages = new ArrayList<>();
-        ResponseMessageEnum.values().foreach(e -> {
-            responseMessages.add(new ResponseMessageBuilder().code(e.id()).message(e.toString()).responseModel(new ModelRef("ApiError")).build());
-            return null;
-        });
+        final List<ResponseMessage> responseMessages =
+                JavaConverters.asJavaCollection(ResponseMessageEnum.values().toList()).stream()
+                        .map(e -> new ResponseMessageBuilder()
+                                .code(e.id())
+                                .message(e.toString()).responseModel(new ModelRef("ApiError")).build())
+                        .collect(Collectors.toList());
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)
