@@ -21,12 +21,8 @@ public class I18N {
     public static String getLocalResource(Locale locale, String baseName, String key, Object... args) {
         return Optional.of(ResourceBundle.getBundle(baseName, locale))
                 .map(rb -> rb.getString(key))
-                .map(message -> {
-                    if (args != null && args.length > 0) {
-                        return MessageFormat.format(message, args);
-                    } else {
-                        return message;
-                    }
-                }).orElse(null);
+                .map(message -> args != null && args.length > 0
+                        ? MessageFormat.format(message, args)
+                        : message).orElse(null);
     }
 }

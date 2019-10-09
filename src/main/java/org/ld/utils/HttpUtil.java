@@ -1,6 +1,7 @@
 package org.ld.utils;
 
 import org.ld.exception.CodeStackException;
+import org.springframework.http.MediaType;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -15,7 +16,6 @@ import java.util.Objects;
 public class HttpUtil {
 
     private static final Logger LOG = Logger.newInstance();
-    public static String JSON_TYPE = "application/json";
     public static String STREAM_TYPE = "application/octet-stream";
 
     /**
@@ -25,7 +25,7 @@ public class HttpUtil {
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setConnectTimeout(30000);
         conn.setReadTimeout(30000);
-        conn.setRequestProperty("Content-Type", JSON_TYPE);
+        conn.setRequestProperty("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         conn.setDoOutput(true);
         conn.setUseCaches(false);
         return conn;

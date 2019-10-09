@@ -34,7 +34,7 @@ public class DataSourceConfiguration {
     @Bean
     @Primary
     public DataSource dataSource() {
-        HikariDataSource datasource = new HikariDataSource();
+        final HikariDataSource datasource = new HikariDataSource();
         datasource.setJdbcUrl(jdbcUrl);
         datasource.setUsername(userName);
         datasource.setPassword(passWord);

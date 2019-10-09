@@ -15,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.MultipartConfigElement;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,21 +44,21 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
-        final List<ResponseMessage> responseMessageList = new ArrayList<>();
-        responseMessageList.add(new ResponseMessageBuilder().code(200).message("操作成功").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(400).message("登录参数错误").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(401).message("用户名或密码错误").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(403).message("用户被禁止").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(404).message("找不到资源").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(409).message("业务逻辑异常").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(422).message("参数校验异常").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(500).message("服务器内部错误").responseModel(new ModelRef("ApiError")).build());
-        responseMessageList.add(new ResponseMessageBuilder().code(503).message("Hystrix异常").responseModel(new ModelRef("ApiError")).build());
+        final List<ResponseMessage> responseMessages = Arrays.asList(
+                new ResponseMessageBuilder().code(200).message("操作成功").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(400).message("登录参数错误").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(401).message("用户名或密码错误").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(403).message("用户被禁止").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(404).message("找不到资源").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(409).message("业务逻辑异常").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(422).message("参数校验异常").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(500).message("服务器内部错误").responseModel(new ModelRef("ApiError")).build(),
+                new ResponseMessageBuilder().code(503).message("Hystrix异常").responseModel(new ModelRef("ApiError")).build());
         return new Docket(DocumentationType.SWAGGER_2)
-                .globalResponseMessage(RequestMethod.GET, responseMessageList)
-                .globalResponseMessage(RequestMethod.POST, responseMessageList)
-                .globalResponseMessage(RequestMethod.PUT, responseMessageList)
-                .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
+                .globalResponseMessage(RequestMethod.GET, responseMessages)
+                .globalResponseMessage(RequestMethod.POST, responseMessages)
+                .globalResponseMessage(RequestMethod.PUT, responseMessages)
+                .globalResponseMessage(RequestMethod.DELETE, responseMessages)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(url -> !"/error".equals(url)) // 屏蔽 这个api
