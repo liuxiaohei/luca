@@ -31,7 +31,15 @@ public class ControllerUtil {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Throwable e) {
             LOG.printStackTrace(e);
-            final CodeStackException se = Optional.ofNullable(findException(e))
+            final CodeStackException se = Optional.of(e)
+                    .map(t -> {
+                        Throwable t1 = t;
+                        while (null != t1) {
+                            if (t1 instanceof CodeStackException) return (CodeStackException) t1;//找到第一个CodeException
+                            t1 = t1.getCause();
+                        }
+                        return null;
+                    })
                     .orElseGet(() -> ExceptionUtil.getSystemErrorValue(e)
                             .map(ErrorCode::new)
                             .map(CodeStackException::new)
@@ -57,17 +65,5 @@ public class ControllerUtil {
                     .orElseGet(e::getMessage));
             return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    /**
-     * 找到第一个CodeException
-     */
-    private static CodeStackException findException(Throwable t) {
-        Throwable t1 = t;
-        while (null != t1) {
-            if (t1 instanceof CodeStackException) return (CodeStackException) t1;
-            t1 = t1.getCause();
-        }
-        return null;
     }
 }
