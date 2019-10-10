@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseMessageBuilder;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
@@ -17,7 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.MultipartConfigElement;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 获取配置中心的自定义配置信息
@@ -45,7 +42,7 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
-        final List<ResponseMessage> responseMessages = ResponseMessageEnum.getMessagesStream().collect(Collectors.toList());
+        final List<ResponseMessage> responseMessages = ResponseMessageEnum.getMessages();
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)

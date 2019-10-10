@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus
 import springfox.documentation.builders.ResponseMessageBuilder
 import springfox.documentation.schema.ModelRef
 import springfox.documentation.service.ResponseMessage
-
-import scala.collection.JavaConverters
+import scala.collection.JavaConverters._
 
 /*
  * @author ld
@@ -22,5 +21,7 @@ object ResponseMessageEnum extends Enumeration {
   Value(HttpStatus.INTERNAL_SERVER_ERROR.value(), "服务器内部错误")
   Value(HttpStatus.SERVICE_UNAVAILABLE.value(), "Hystrix异常")
 
-  def getMessagesStream: util.stream.Stream[ResponseMessage] = JavaConverters.asJavaCollection(values).stream().map((e: Enumeration#Value) => new ResponseMessageBuilder().code(e.id).message(e.toString).responseModel(new ModelRef("ApiError")).build)
+  def getMessages: util.List[ResponseMessage] = values
+    .map((e: Enumeration#Value) => new ResponseMessageBuilder().code(e.id).message(e.toString).responseModel(new ModelRef("ApiError")).build)
+    .toBuffer.asJava
 }
