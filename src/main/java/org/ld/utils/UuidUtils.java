@@ -1,6 +1,8 @@
 package org.ld.utils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SuppressWarnings("unused")
 public class UuidUtils {
@@ -16,13 +18,12 @@ public class UuidUtils {
      * 返回8位uuid
      */
     public static String getShortUuid() {
-        final StringBuilder stringBuilder = new StringBuilder();
         final String uuid = UUID.randomUUID().toString().replace("-", "");
-        for (int i = 0; i < 8; i++) {
-            String str = uuid.substring(i * 4, i * 4 + 4);
-            int x = Integer.parseInt(str, 16);
-            stringBuilder.append(chars[x % 0x3E]);
-        }
-        return stringBuilder.toString();
+        return IntStream.rangeClosed(0,7).boxed()
+                .map(i -> uuid.substring(i * 4, i * 4 + 4))
+                .map(str -> Integer.parseInt(str,16))
+                .map(i -> i % 0x3E)
+                .map(i -> chars[i])
+                .collect(Collectors.joining());
     }
 }
