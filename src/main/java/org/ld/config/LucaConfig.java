@@ -45,11 +45,7 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
-        final List<ResponseMessage> responseMessages = ResponseMessageEnum.getMessagesStream()
-                .map(e -> new ResponseMessageBuilder()
-                        .code(e.id())
-                        .message(e.toString()).responseModel(new ModelRef("ApiError")).build())
-                .collect(Collectors.toList());
+        final List<ResponseMessage> responseMessages = ResponseMessageEnum.getMessagesStream().collect(Collectors.toList());
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)

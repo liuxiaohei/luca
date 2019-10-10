@@ -1,8 +1,10 @@
 package org.ld.enums
 
 import java.util
-
 import org.springframework.http.HttpStatus
+import springfox.documentation.builders.ResponseMessageBuilder
+import springfox.documentation.schema.ModelRef
+import springfox.documentation.service.ResponseMessage
 
 import scala.collection.JavaConverters
 
@@ -20,5 +22,5 @@ object ResponseMessageEnum extends Enumeration {
   Value(HttpStatus.INTERNAL_SERVER_ERROR.value(), "服务器内部错误")
   Value(HttpStatus.SERVICE_UNAVAILABLE.value(), "Hystrix异常")
 
-  def getMessagesStream: util.stream.Stream[Value] = JavaConverters.asJavaCollection(values).stream()
+  def getMessagesStream: util.stream.Stream[ResponseMessage] = JavaConverters.asJavaCollection(values).stream().map((e: Enumeration#Value) => new ResponseMessageBuilder().code(e.id).message(e.toString).responseModel(new ModelRef("ApiError")).build)
 }

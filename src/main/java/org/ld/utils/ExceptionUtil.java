@@ -32,7 +32,7 @@ public class ExceptionUtil {
         EXCEPTIONS.put(FileNotFoundException.class,SystemErrorCodeEnum.FILE_NOTFOUND_EXCEPTION());
         EXCEPTIONS.put(ClassNotFoundException.class,SystemErrorCodeEnum.CLASS_NOT_FOUND_EXCEPTION());
         EXCEPTIONS.put(ClassCastException.class,SystemErrorCodeEnum.CLASS_CAST_EXCEPTION());
-        EXCEPTIONS.put(IndexOutOfBoundsException.class,SystemErrorCodeEnum.INDEX_OUTOFBOUNDS_EXCEPTION());
+        EXCEPTIONS.put(IndexOutOfBoundsException.class,SystemErrorCodeEnum.INDEX_OUTBIDS_EXCEPTION());
         EXCEPTIONS.put(ArithmeticException.class,SystemErrorCodeEnum.ARITHMETIC_EXCEPTION());
         EXCEPTIONS.put(SQLException.class,SystemErrorCodeEnum.SQL_EXCEPTION());
         EXCEPTIONS.put(DataAccessException.class,SystemErrorCodeEnum.DATA_ACCESS_FAILED());
