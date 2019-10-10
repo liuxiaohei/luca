@@ -23,7 +23,7 @@ public class ControllerUtil {
      */
     public static Object convertResponseBody(UncheckedSupplier point) {
         try {
-            ResponseBodyBean<Object> result = new ResponseBodyBean<>();
+            final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setData(point.get());
             result.setErrorCode(SystemErrorCodeEnum.SUCCESS().id());
             result.setMessage(SystemErrorCodeEnum.SUCCESS().toString());
@@ -36,7 +36,7 @@ public class ControllerUtil {
                             .map(ErrorCode::new)
                             .map(CodeStackException::new)
                             .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOWN()))));
-            ResponseBodyBean<Object> result = new ResponseBodyBean<>();
+            final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setErrorCode(Optional.of(se)
                     .map(CodeStackException::getValue)
                     .map(Enumeration.Value::id)
@@ -47,7 +47,7 @@ public class ControllerUtil {
                         e.printStackTrace(new PrintWriter(sw));
                         return Stream.of(sw.toString().split("\n\t"))
                                 .skip(1)
-                                .map(str -> str.replace("\n",""))
+                                .map(str -> str.replace("\n", ""))
                                 .toArray(String[]::new);
                     }).orElse(null));
             result.setMessage(Optional.of(se)
@@ -63,10 +63,11 @@ public class ControllerUtil {
      * 找到第一个CodeException
      */
     private static CodeStackException findException(Throwable t) {
-        return Optional.ofNullable(t)
-                .map(e -> e instanceof CodeStackException
-                        ? (CodeStackException) e
-                        : findException(e.getCause()))
-                .orElse(null);
+        Throwable t1 = t;
+        while (null != t1) {
+            if (t1 instanceof CodeStackException) return (CodeStackException) t1;
+            t1 = t1.getCause();
+        }
+        return null;
     }
 }
