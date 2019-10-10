@@ -5,7 +5,6 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
-import scala.collection.JavaConverters;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
@@ -46,12 +45,11 @@ public class LucaConfig {
      */
     @Bean
     public Docket api() {
-        final List<ResponseMessage> responseMessages =
-                JavaConverters.asJavaCollection(ResponseMessageEnum.values().toList()).stream()
-                        .map(e -> new ResponseMessageBuilder()
-                                .code(e.id())
-                                .message(e.toString()).responseModel(new ModelRef("ApiError")).build())
-                        .collect(Collectors.toList());
+        final List<ResponseMessage> responseMessages = ResponseMessageEnum.getMessagesStream()
+                .map(e -> new ResponseMessageBuilder()
+                        .code(e.id())
+                        .message(e.toString()).responseModel(new ModelRef("ApiError")).build())
+                .collect(Collectors.toList());
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)

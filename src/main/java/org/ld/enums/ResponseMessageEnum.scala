@@ -1,6 +1,10 @@
 package org.ld.enums
 
+import java.util
+
 import org.springframework.http.HttpStatus
+
+import scala.collection.JavaConverters
 
 /*
  * @author ld
@@ -15,4 +19,6 @@ object ResponseMessageEnum extends Enumeration {
   Value(HttpStatus.UNPROCESSABLE_ENTITY.value(), "参数校验异常")
   Value(HttpStatus.INTERNAL_SERVER_ERROR.value(), "服务器内部错误")
   Value(HttpStatus.SERVICE_UNAVAILABLE.value(), "Hystrix异常")
+
+  def getMessagesStream: util.stream.Stream[Value] = JavaConverters.asJavaCollection(values).stream()
 }
