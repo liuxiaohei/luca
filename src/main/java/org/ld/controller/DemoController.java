@@ -29,7 +29,7 @@ public class DemoController {
     }
 
     @ApiOperation(value = "错误事例", produces = MediaType.APPLICATION_JSON_VALUE)
-    @GetMapping(value = "errordemo")
+    @GetMapping(value = "errored")
     public Object errorDemo() {
         Map<String, Object> a = new HashMap<>();
         Objects.requireNonNull(null);
