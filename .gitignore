@@ -23,3 +23,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+mybatisGen/target/
+.DS_Store
+Icon
