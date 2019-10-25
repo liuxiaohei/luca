@@ -3,7 +3,6 @@ package org.ld.utils;
 import org.ld.beans.ResponseBodyBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeStackException;
-import org.ld.exception.ErrorCode;
 import org.ld.functions.UncheckedSupplier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,10 +39,7 @@ public class ControllerUtil {
                         }
                         return null;
                     })
-                    .orElseGet(() -> SystemErrorCodeEnum.getSystemErrorValue(e)
-                            .map(ErrorCode::new)
-                            .map(CodeStackException::new)
-                            .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOWN()))));
+                    .orElseGet(() -> SystemErrorCodeEnum.getSystemError(e));
             final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setErrorCode(Optional.of(se)
                     .map(CodeStackException::getValue)

@@ -2,7 +2,6 @@ package org.ld.exception;
 
 
 import org.ld.enums.SystemErrorCodeEnum;
-import org.ld.utils.Logger;
 import scala.Enumeration;
 
 /**
@@ -10,8 +9,6 @@ import scala.Enumeration;
  */
 @SuppressWarnings("unused")
 public class CodeStackException extends RuntimeException {
-
-    private static Logger logger = Logger.newInstance();
 
     private ErrorCode errorCode;
 
@@ -23,14 +20,7 @@ public class CodeStackException extends RuntimeException {
     public CodeStackException(Throwable e) {
         super(e.getMessage(), e);
         super.setStackTrace(e.getStackTrace());
-        this.errorCode = e instanceof CodeStackException
-                ? ((CodeStackException) e).errorCode
-                : new ErrorCode(SystemErrorCodeEnum.getSystemErrorValue(e)
-                .filter(code -> {
-                    logger.info(() -> "ErrorCode:" + code.id() + " Reason:" + code.toString());
-                    return true;
-                })
-                .orElseGet(SystemErrorCodeEnum::UNKNOWN));
+        this.errorCode = SystemErrorCodeEnum.getSystemError(e).errorCode;
     }
 
     public Enumeration.Value getValue() {

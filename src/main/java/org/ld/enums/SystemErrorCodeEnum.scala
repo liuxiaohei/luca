@@ -2,7 +2,9 @@ package org.ld.enums
 
 import java.io.{FileNotFoundException, IOException}
 import java.sql.SQLException
-import java.util.Optional
+
+import org.ld.exception.{CodeStackException, ErrorCode}
+import org.ld.utils.Logger
 import org.springframework.dao.DataAccessException
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -65,11 +67,16 @@ object SystemErrorCodeEnum extends Enumeration {
 
   val PARAMS_INVALID = Value(10000, "参数错误")
 
-  implicit def getOptional(a: Enumeration#Value): Optional[Enumeration#Value] = Optional.of(a)
+  private val logger = Logger.newInstance
 
-  def getSystemErrorValue(e: Throwable): Optional[Enumeration#Value] = {
+  implicit def getOptional(a: Enumeration#Value): CodeStackException = {
+    logger.info(() => "ErrorCode:" + a.id + " Reason:" + a.toString)
+    new CodeStackException(new ErrorCode(a))
+  }
+
+  def getSystemError(e: Throwable): CodeStackException = {
     e match {
-      //case exception: CodeStackException => Optional.of(exception).map(_.getValue)
+      case exception: CodeStackException => exception
       case _: NullPointerException => SystemErrorCodeEnum.NULL_POINTER_EXCEPTION
       case _: HttpMessageNotReadableException => SystemErrorCodeEnum.PARAMS_INVALID
       case _: MethodArgumentNotValidException => SystemErrorCodeEnum.PARAMS_INVALID
