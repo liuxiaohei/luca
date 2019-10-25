@@ -6,8 +6,6 @@ import java.sql.SQLException
 import org.ld.exception.{CodeStackException, ErrorCode}
 import org.ld.utils.Logger
 import org.springframework.dao.DataAccessException
-import org.springframework.http.converter.HttpMessageNotReadableException
-import org.springframework.web.bind.MethodArgumentNotValidException
 
 /*
  * @author ld
@@ -78,13 +76,12 @@ object SystemErrorCodeEnum extends Enumeration {
     e match {
       case exception: CodeStackException => exception
       case _: NullPointerException => SystemErrorCodeEnum.NULL_POINTER_EXCEPTION
-      case _: HttpMessageNotReadableException => SystemErrorCodeEnum.PARAMS_INVALID
-      case _: MethodArgumentNotValidException => SystemErrorCodeEnum.PARAMS_INVALID
       case _: OutOfMemoryError => SystemErrorCodeEnum.OUT_OF_MEMORY_ERROR
       case _: IOException => SystemErrorCodeEnum.IO_EXCEPTION
       case _: FileNotFoundException => SystemErrorCodeEnum.FILE_NOTFOUND_EXCEPTION
       case _: ClassNotFoundException => SystemErrorCodeEnum.CLASS_NOT_FOUND_EXCEPTION
       case _: ClassCastException => SystemErrorCodeEnum.CLASS_CAST_EXCEPTION
+      case _: NoSuchElementException => SystemErrorCodeEnum.NO_SUCH_METHOD_EXCEPTION
       case _: IndexOutOfBoundsException => SystemErrorCodeEnum.INDEX_OUTBIDS_EXCEPTION
       case _: ArithmeticException => SystemErrorCodeEnum.ARITHMETIC_EXCEPTION
       case _: SQLException => SystemErrorCodeEnum.SQL_EXCEPTION
