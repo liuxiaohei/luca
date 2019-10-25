@@ -40,7 +40,7 @@ public class ControllerUtil {
                         }
                         return null;
                     })
-                    .orElseGet(() -> ExceptionUtil.getSystemErrorValue(e)
+                    .orElseGet(() -> SystemErrorCodeEnum.getSystemErrorValue(e)
                             .map(ErrorCode::new)
                             .map(CodeStackException::new)
                             .orElseGet(() -> new CodeStackException(new ErrorCode(SystemErrorCodeEnum.UNKNOWN()))));

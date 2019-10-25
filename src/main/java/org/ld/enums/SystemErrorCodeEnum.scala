@@ -1,5 +1,12 @@
 package org.ld.enums
 
+import java.io.{FileNotFoundException, IOException}
+import java.sql.SQLException
+import java.util.Optional
+import org.springframework.dao.DataAccessException
+import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.web.bind.MethodArgumentNotValidException
+
 /*
  * @author ld
  * 系统级ErrorCode
@@ -58,4 +65,59 @@ object SystemErrorCodeEnum extends Enumeration {
 
   val PARAMS_INVALID = Value(10000, "参数错误")
 
+  implicit def getOptional(a: Enumeration#Value): Optional[Enumeration#Value] = Optional.of(a)
+
+  def getSystemErrorValue(e: Throwable): Optional[Enumeration#Value] = {
+    e match {
+      //case exception: CodeStackException => Optional.of(exception).map(_.getValue)
+      case _: NullPointerException => SystemErrorCodeEnum.NULL_POINTER_EXCEPTION
+      case _: HttpMessageNotReadableException => SystemErrorCodeEnum.PARAMS_INVALID
+      case _: MethodArgumentNotValidException => SystemErrorCodeEnum.PARAMS_INVALID
+      case _: OutOfMemoryError => SystemErrorCodeEnum.OUT_OF_MEMORY_ERROR
+      case _: IOException => SystemErrorCodeEnum.IO_EXCEPTION
+      case _: FileNotFoundException => SystemErrorCodeEnum.FILE_NOTFOUND_EXCEPTION
+      case _: ClassNotFoundException => SystemErrorCodeEnum.CLASS_NOT_FOUND_EXCEPTION
+      case _: ClassCastException => SystemErrorCodeEnum.CLASS_CAST_EXCEPTION
+      case _: IndexOutOfBoundsException => SystemErrorCodeEnum.INDEX_OUTBIDS_EXCEPTION
+      case _: ArithmeticException => SystemErrorCodeEnum.ARITHMETIC_EXCEPTION
+      case _: SQLException => SystemErrorCodeEnum.SQL_EXCEPTION
+      case _: DataAccessException => SystemErrorCodeEnum.DATA_ACCESS_FAILED
+      case _: UnsupportedOperationException => SystemErrorCodeEnum.UNSUPPORTED_OPERATION_EXCEPTION
+      case _: TypeNotPresentException => SystemErrorCodeEnum.TYPE_NOT_PRESENT_EXCEPTION
+      case _: StringIndexOutOfBoundsException => SystemErrorCodeEnum.STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION
+      case _: SecurityException => SystemErrorCodeEnum.SECURITY_EXCEPTION
+      case _: NumberFormatException => SystemErrorCodeEnum.NUMBER_FORMAT_EXCEPTION
+      case _: NoSuchFieldException => SystemErrorCodeEnum.NO_SUCH_FIELD_EXCEPTION
+      case _: NegativeArraySizeException => SystemErrorCodeEnum.NEGATIVE_ARRAY_SIZE_EXCEPTION
+      case _: InterruptedException => SystemErrorCodeEnum.INTERRUPTED_EXCEPTION
+      case _: InstantiationException => SystemErrorCodeEnum.INSTANTIATION_EXCEPTION
+      case _: IllegalThreadStateException => SystemErrorCodeEnum.ILLEGAL_THREAD_STATE_EXCEPTION
+      case _: IllegalStateException => SystemErrorCodeEnum.ILLEGAL_STATE_EXCEPTION
+      case _: IllegalMonitorStateException => SystemErrorCodeEnum.ILLEGAL_MONITOR_STATE_EXCEPTION
+      case _: IllegalAccessException => SystemErrorCodeEnum.ILLEGAL_ACCESS_EXCEPTION
+      case _: EnumConstantNotPresentException => SystemErrorCodeEnum.ENUM_CONSTANT_NOT_PRESENT_EXCEPTION
+      case _: CloneNotSupportedException => SystemErrorCodeEnum.CLONE_NOT_SUPPORTED_EXCEPTION
+      case _: ArrayStoreException => SystemErrorCodeEnum.ARRAY_STORE_EXCEPTION
+      case _: VirtualMachineError => SystemErrorCodeEnum.VIRTUAL_MACHINE_ERROR
+      case _: VerifyError => SystemErrorCodeEnum.VERIFY_ERROR
+      case _: UnsupportedClassVersionError => SystemErrorCodeEnum.UNSUPPORTED_CLASS_VERSION_ERROR
+      case _: UnsatisfiedLinkError => SystemErrorCodeEnum.UNSATISFIED_LINK_ERROR
+      case _: UnknownError => SystemErrorCodeEnum.UNKNOWN_ERROR
+      case _: ThreadDeath => SystemErrorCodeEnum.THREAD_DEATH
+      case _: StackOverflowError => SystemErrorCodeEnum.STACK_OVERFLOW_ERROR
+      case _: NoSuchFieldError => SystemErrorCodeEnum.NO_SUCH_FIELD_ERROR
+      case _: NoClassDefFoundError => SystemErrorCodeEnum.NO_CLASS_DEF_FOUND_ERROR
+      case _: LinkageError => SystemErrorCodeEnum.LINKAGE_ERROR
+      case _: InternalError => SystemErrorCodeEnum.INTERNAL_ERROR
+      case _: InstantiationError => SystemErrorCodeEnum.INSTANTIATION_ERROR
+      case _: IncompatibleClassChangeError => SystemErrorCodeEnum.INCOMPATIBLE_CLASS_CHANGE_ERROR
+      case _: IllegalAccessError => SystemErrorCodeEnum.ILLEGAL_ACCESS_ERROR
+      case _: ExceptionInInitializerError => SystemErrorCodeEnum.EXCEPTION_IN_INITIALIZER_ERROR
+      case _: ClassFormatError => SystemErrorCodeEnum.CLASS_FORMAT_ERROR
+      case _: ClassCircularityError => SystemErrorCodeEnum.CLASS_CIRCULARITY_ERROR
+      case _: AssertionError => SystemErrorCodeEnum.ASSERTION_ERROR
+      case _: AbstractMethodError => SystemErrorCodeEnum.ABSTRACT_METHOD_ERROR
+      case _ => SystemErrorCodeEnum.UNKNOWN
+    }
+  }
 }
