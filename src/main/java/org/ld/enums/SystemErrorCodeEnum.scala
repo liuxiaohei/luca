@@ -83,10 +83,23 @@ object SystemErrorCodeEnum extends Enumeration {
   def getSystemError(e: Throwable): CodeStackException = {
     e match {
       case exception: CodeStackException => exception
+      case _: AbstractMethodError => SystemErrorCodeEnum.ABSTRACT_METHOD_ERROR
+      case _: ClassCircularityError => SystemErrorCodeEnum.CLASS_CIRCULARITY_ERROR
+      case _: UnsupportedClassVersionError => SystemErrorCodeEnum.UNSUPPORTED_CLASS_VERSION_ERROR
+      case _: ClassFormatError => SystemErrorCodeEnum.CLASS_FORMAT_ERROR
+      case _: ExceptionInInitializerError => SystemErrorCodeEnum.EXCEPTION_IN_INITIALIZER_ERROR
+      case _: IllegalAccessError => SystemErrorCodeEnum.ILLEGAL_ACCESS_ERROR
+      case _: NoSuchFieldError => SystemErrorCodeEnum.NO_SUCH_FIELD_ERROR
+      case _: InstantiationError => SystemErrorCodeEnum.INSTANTIATION_ERROR
+      case _: IncompatibleClassChangeError => SystemErrorCodeEnum.INCOMPATIBLE_CLASS_CHANGE_ERROR
+      case _: InternalError => SystemErrorCodeEnum.INTERNAL_ERROR
+      case _: StackOverflowError => SystemErrorCodeEnum.STACK_OVERFLOW_ERROR
+      case _: UnknownError => SystemErrorCodeEnum.UNKNOWN_ERROR
+      case _: StringIndexOutOfBoundsException => SystemErrorCodeEnum.STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION
       case _: NullPointerException => SystemErrorCodeEnum.NULL_POINTER_EXCEPTION
       case _: OutOfMemoryError => SystemErrorCodeEnum.OUT_OF_MEMORY_ERROR
-      case _: IOException => SystemErrorCodeEnum.IO_EXCEPTION
       case _: FileNotFoundException => SystemErrorCodeEnum.FILE_NOTFOUND_EXCEPTION
+      case _: IOException => SystemErrorCodeEnum.IO_EXCEPTION
       case _: ClassNotFoundException => SystemErrorCodeEnum.CLASS_NOT_FOUND_EXCEPTION
       case _: ClassCastException => SystemErrorCodeEnum.CLASS_CAST_EXCEPTION
       case _: NoSuchElementException => SystemErrorCodeEnum.NO_SUCH_METHOD_EXCEPTION
@@ -96,7 +109,6 @@ object SystemErrorCodeEnum extends Enumeration {
       case _: DataAccessException => SystemErrorCodeEnum.DATA_ACCESS_FAILED
       case _: UnsupportedOperationException => SystemErrorCodeEnum.UNSUPPORTED_OPERATION_EXCEPTION
       case _: TypeNotPresentException => SystemErrorCodeEnum.TYPE_NOT_PRESENT_EXCEPTION
-      case _: StringIndexOutOfBoundsException => SystemErrorCodeEnum.STRING_INDEX_OUT_OF_BOUNDS_EXCEPTION
       case _: SecurityException => SystemErrorCodeEnum.SECURITY_EXCEPTION
       case _: NumberFormatException => SystemErrorCodeEnum.NUMBER_FORMAT_EXCEPTION
       case _: NoSuchFieldException => SystemErrorCodeEnum.NO_SUCH_FIELD_EXCEPTION
@@ -112,23 +124,11 @@ object SystemErrorCodeEnum extends Enumeration {
       case _: ArrayStoreException => SystemErrorCodeEnum.ARRAY_STORE_EXCEPTION
       case _: VirtualMachineError => SystemErrorCodeEnum.VIRTUAL_MACHINE_ERROR
       case _: VerifyError => SystemErrorCodeEnum.VERIFY_ERROR
-      case _: UnsupportedClassVersionError => SystemErrorCodeEnum.UNSUPPORTED_CLASS_VERSION_ERROR
       case _: UnsatisfiedLinkError => SystemErrorCodeEnum.UNSATISFIED_LINK_ERROR
-      case _: UnknownError => SystemErrorCodeEnum.UNKNOWN_ERROR
       case _: ThreadDeath => SystemErrorCodeEnum.THREAD_DEATH
-      case _: StackOverflowError => SystemErrorCodeEnum.STACK_OVERFLOW_ERROR
-      case _: NoSuchFieldError => SystemErrorCodeEnum.NO_SUCH_FIELD_ERROR
       case _: NoClassDefFoundError => SystemErrorCodeEnum.NO_CLASS_DEF_FOUND_ERROR
       case _: LinkageError => SystemErrorCodeEnum.LINKAGE_ERROR
-      case _: InternalError => SystemErrorCodeEnum.INTERNAL_ERROR
-      case _: InstantiationError => SystemErrorCodeEnum.INSTANTIATION_ERROR
-      case _: IncompatibleClassChangeError => SystemErrorCodeEnum.INCOMPATIBLE_CLASS_CHANGE_ERROR
-      case _: IllegalAccessError => SystemErrorCodeEnum.ILLEGAL_ACCESS_ERROR
-      case _: ExceptionInInitializerError => SystemErrorCodeEnum.EXCEPTION_IN_INITIALIZER_ERROR
-      case _: ClassFormatError => SystemErrorCodeEnum.CLASS_FORMAT_ERROR
-      case _: ClassCircularityError => SystemErrorCodeEnum.CLASS_CIRCULARITY_ERROR
       case _: AssertionError => SystemErrorCodeEnum.ASSERTION_ERROR
-      case _: AbstractMethodError => SystemErrorCodeEnum.ABSTRACT_METHOD_ERROR
       case _ => SystemErrorCodeEnum.UNKNOWN
     }
   }
