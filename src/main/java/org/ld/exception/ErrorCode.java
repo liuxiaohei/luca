@@ -1,6 +1,6 @@
 package org.ld.exception;
 
-import scala.Enumeration;
+import org.ld.beans.ValueBean;
 
 @SuppressWarnings("unused")
 public class ErrorCode {
@@ -9,25 +9,16 @@ public class ErrorCode {
 
     private String msg;
 
-    private Enumeration.Value value;
+    private ValueBean value;
 
-    public Enumeration.Value getValue() {
+    public ValueBean getValue() {
         return value;
     }
 
-    public ErrorCode(Enumeration.Value value) {
+    public ErrorCode(ValueBean value) {
         this.value = value;
         this.code = value.id();
-        this.msg = value.toString();
-    }
-
-    /**
-     * 临时重设错误文案
-     */
-    @Deprecated
-    public ErrorCode reSetMsg(String msg) {
-        this.msg = msg;
-        return this;
+        this.msg = value.value();
     }
 
     public String getMessage() {

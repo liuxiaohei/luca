@@ -21,11 +21,6 @@ import java.util.stream.Stream;
 public class DemoTest {
 
     @Test
-    public void demo() {
-        System.out.println(new ErrorCode(SystemErrorCodeEnum.SUCCESS()).getMessage());
-    }
-
-    @Test
     public void sendMail() {
 
     }

@@ -1,12 +1,12 @@
 package org.ld.utils;
 
 import org.ld.beans.ResponseBodyBean;
+import org.ld.beans.ValueBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeStackException;
 import org.ld.functions.UncheckedSupplier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import scala.Enumeration;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -43,7 +43,7 @@ public class ControllerUtil {
             final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setErrorCode(Optional.of(se)
                     .map(CodeStackException::getValue)
-                    .map(Enumeration.Value::id)
+                    .map(ValueBean::id)
                     .orElseGet(SystemErrorCodeEnum.UNKNOWN()::id));
             result.setStackTrace(Optional.of(e)
                     .map(error -> {
@@ -56,8 +56,8 @@ public class ControllerUtil {
                     }).orElse(null));
             result.setMessage(Optional.of(se)
                     .map(CodeStackException::getValue)
-                    .filter(value -> !value.equals(SystemErrorCodeEnum.UNKNOWN()))
-                    .map(Enumeration.Value::toString)
+                    .filter(value -> !value.id().equals(SystemErrorCodeEnum.UNKNOWN().id()))
+                    .map(ValueBean::value)
                     .orElseGet(e::getMessage));
             return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,8 +1,8 @@
 package org.ld.exception;
 
 
+import org.ld.beans.ValueBean;
 import org.ld.enums.SystemErrorCodeEnum;
-import scala.Enumeration;
 
 /**
  * ld
@@ -23,7 +23,7 @@ public class CodeStackException extends RuntimeException {
         this.errorCode = SystemErrorCodeEnum.getSystemError(e).errorCode;
     }
 
-    public Enumeration.Value getValue() {
+    public ValueBean getValue() {
         return errorCode.getValue();
     }
 
@@ -31,7 +31,7 @@ public class CodeStackException extends RuntimeException {
         throw new CodeStackException(info);
     }
 
-    public static void throwException(Enumeration.Value value) {
+    public static void throwException(ValueBean value) {
         throw new CodeStackException(new ErrorCode(value));
     }
 

@@ -3,6 +3,7 @@ package org.ld.enums
 import java.io.{FileNotFoundException, IOException}
 import java.sql.SQLException
 
+import org.ld.beans.ValueBean
 import org.ld.exception.{CodeStackException, ErrorCode}
 import org.ld.utils.Logger
 import org.springframework.dao.DataAccessException
@@ -70,6 +71,13 @@ object SystemErrorCodeEnum extends Enumeration {
   implicit def getOptional(a: Enumeration#Value): CodeStackException = {
     logger.info(() => "ErrorCode:" + a.id + " Reason:" + a.toString)
     new CodeStackException(new ErrorCode(a))
+  }
+
+  implicit def getValueBean(a: Enumeration#Value):ValueBean = {
+    val b = new ValueBean
+    b.id = a.id
+    b.value = a.toString
+    b
   }
 
   def getSystemError(e: Throwable): CodeStackException = {
