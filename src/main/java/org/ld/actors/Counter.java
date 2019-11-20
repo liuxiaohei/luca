@@ -25,18 +25,14 @@ public class Counter extends AbstractActor {
 
 
     public static void main(String[] args) throws InterruptedException {
+        log.info(() -> "start");
         ActorSystem actorSystem = ActorSystem.create("actorSystemName");
-        ActorRef userLoginActor = actorSystem.actorOf(Props.create(Counter.class, Counter::new), "userLoginActorName");
-        IntStream.rangeClosed(0, 100).parallel().forEach(e -> {
-                    userLoginActor.tell(new User(1, "Dong" + e, 30), ActorRef.noSender());
-                    userLoginActor.tell(new User(1, "Dong" + e, 30), ActorRef.noSender());
-                    try {
-                        Thread.sleep(10);
-                    } catch (Exception ignored) {
-                    }
+        IntStream.rangeClosed(0, 10000).forEach(e -> {
+                    ActorRef userLoginActor = actorSystem.actorOf(Props.create(Counter.class, Counter::new), "userLoginActorName" + e);
+                    userLoginActor.tell(new User(1, "User" + e, 30), ActorRef.noSender());
                 }
         );
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         actorSystem.terminate(); // 这个方法终止 actor
     }
 }
