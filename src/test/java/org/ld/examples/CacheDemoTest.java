@@ -23,11 +23,17 @@ public class CacheDemoTest {
     public void demo() throws Exception {
         System.out.println(cache.get("aaa",this::getbbb));
         System.out.println(cache.get("aaa",this::getbbb));
+        cache.put("aaa",this.getccc());
+        System.out.println(cache.get("aaa",this::getbbb));
+        System.out.println(cache.get("aaa",this::getbbb));
     }
 
     private String getbbb() {
-        System.out.println("======");
         return "bbb";
+    }
+
+    private String getccc() {
+        return "ccc";
     }
 
 

@@ -36,4 +36,10 @@ public class DemoController {
         return a;
     }
 
+    @ApiOperation(value = "时间", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "time")
+    public Object time() {
+        return (1575021600000L - System.currentTimeMillis())/1000;
+    }
+
 }
