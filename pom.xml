@@ -116,6 +116,11 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.8.2</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
         <dependency>
@@ -162,6 +167,10 @@
                 <exclusion>
                     <artifactId>scala-library</artifactId>
                     <groupId>org.scala-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>avro</artifactId>
+                    <groupId>org.apache.avro</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
