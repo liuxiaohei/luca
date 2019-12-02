@@ -1,0 +1,19 @@
+# 端口号
+server:
+  port: 9999
+
+# mybatis xml 地址
+mybatis:
+  mapperLocations: classpath:/mapper/*.xml
+
+# 持久层数据库配置
+db:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3306/canal_client?useUnicode=true&amp;amp;characterEncoding=utf-8&useSSL=false&amp;amp;autoReconnect=true
+  username: root
+  password: 123456
+
+spark:
+  spark-home: .
+  app-name: sparkTest
+  master: local[4]

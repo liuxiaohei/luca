@@ -14,9 +14,6 @@ import javax.sql.DataSource;
 @SuppressWarnings("unused")
 @Configuration
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-@PropertySources(value = {
-        @PropertySource(value = "classpath:dataSource.properties")
-})
 public class DataSourceConfiguration {
 
     @Value("${db.driver}")

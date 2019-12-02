@@ -17,7 +17,7 @@ public class ApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		userDao.selectByPrimaryKey(1);
+		System.out.println(userDao.selectByPrimaryKey(1).getId());
 	}
 
 }

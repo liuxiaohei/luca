@@ -41,6 +41,12 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- test引入测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,44 +124,8 @@
             <version>2.4.4</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>paranamer</artifactId>
-                    <groupId>com.thoughtworks.paranamer</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>snappy-java</artifactId>
-                    <groupId>org.xerial.snappy</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-collections</artifactId>
-                    <groupId>commons-collections</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-lang</artifactId>
-                    <groupId>commons-lang</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>netty</artifactId>
-                    <groupId>io.netty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>avro</artifactId>
-                    <groupId>org.apache.avro</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-math3</artifactId>
-                    <groupId>org.apache.commons</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>objenesis</artifactId>
-                    <groupId>org.objenesis</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>scala-library</artifactId>
-                    <groupId>org.scala-lang</groupId>
+                    <artifactId>commons-configuration</artifactId>
+                    <groupId>commons-configuration</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -164,24 +134,6 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.12</artifactId>
             <version>2.4.4</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jsr305</artifactId>
-                    <groupId>com.google.code.findbugs</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>snappy-java</artifactId>
-                    <groupId>org.xerial.snappy</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>scala-reflect</artifactId>
-                    <groupId>org.scala-lang</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-compiler</artifactId>
-                    <groupId>org.codehaus.janino</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
     </dependencies>

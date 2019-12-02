@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ *
  */
 @SuppressWarnings("unused")
 public class Logger {
@@ -62,7 +63,20 @@ public class Logger {
         }
     }
 
+    public void info(String string) {
+        if (logger.isInfoEnabled()) {
+            logger.info(string);
+        }
+    }
+
+    public void info(String format, Object arg) {
+        if (logger.isInfoEnabled()) {
+            logger.info(format, arg);
+        }
+    }
+
     /**
+     *
      */
     public void error(UncheckedSupplier<String> supplier, Object... params) {
         if (logger.isErrorEnabled()) {

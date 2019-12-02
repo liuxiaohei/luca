@@ -63,11 +63,11 @@ public class DemoTest {
 //                jar.close();
 //            }
 //            // with shutdown.jar in the classpath, we can now invoke the ocmmand
-//            // org.jboss.Shutdown.main("-S") to shtudown the server
+//            // org.jboss.Shutdown.org.ld.main("-S") to shtudown the server
 //            System.setProperty("java.naming.factory.initial", "org.jnp.interfaces.NamingContextFactory");
 //            System.setProperty("jboss.boot.loader.name", "shutdown.bat");
 //            final Class<?> clazz = cl.loadClass("org.jboss.Shutdown");
-//            final Method method = clazz.getDeclaredMethod("main", String[].class);
+//            final Method method = clazz.getDeclaredMethod("org.ld.main", String[].class);
 //            System.out.println("shutting down by invoking " + method);
 //            method.invoke((Object) null, (Object) new String[]{"-S"});
 //        } catch (final Exception e) {
