@@ -135,6 +135,10 @@
                     <artifactId>objenesis</artifactId>
                     <groupId>org.objenesis</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>commons-math3</artifactId>
+                    <groupId>org.apache.commons</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
