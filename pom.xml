@@ -124,6 +124,10 @@
             <version>2.4.0</version>
             <exclusions>
                 <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
                     <artifactId>commons-configuration</artifactId>
                     <groupId>commons-configuration</groupId>
                 </exclusion>
@@ -134,6 +138,12 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.12</artifactId>
             <version>2.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
