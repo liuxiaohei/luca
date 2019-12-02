@@ -159,6 +159,10 @@
                     <artifactId>snappy-java</artifactId>
                     <groupId>org.xerial.snappy</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
