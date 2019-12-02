@@ -183,6 +183,14 @@
                     <artifactId>commons-compiler</artifactId>
                     <groupId>org.codehaus.janino</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>scala-reflect</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
