@@ -1,7 +1,7 @@
 package org.ld.utils;
 
 import org.ld.exception.CodeStackException;
-import org.ld.functions.UncheckedSupplier;
+import org.ld.functions.UCSupplier;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
@@ -45,19 +45,19 @@ public class Logger {
         });
     }
 
-    public void debug(UncheckedSupplier<String> supplier) {
+    public void debug(UCSupplier<String> supplier) {
         if (logger.isDebugEnabled()) {
             logger.debug(Try.of(supplier).get());
         }
     }
 
-    public void debugThrowable(UncheckedSupplier<Throwable> supplier) {
+    public void debugThrowable(UCSupplier<Throwable> supplier) {
         if (logger.isDebugEnabled()) {
             logger.debug("Error : ", Try.of(supplier).get());
         }
     }
 
-    public void info(UncheckedSupplier<String> supplier) {
+    public void info(UCSupplier<String> supplier) {
         if (logger.isInfoEnabled()) {
             logger.info(Try.of(supplier).get());
         }
@@ -78,7 +78,7 @@ public class Logger {
     /**
      *
      */
-    public void error(UncheckedSupplier<String> supplier, Object... params) {
+    public void error(UCSupplier<String> supplier, Object... params) {
         if (logger.isErrorEnabled()) {
             logger.error(Try.of(supplier).get(), params);
         }

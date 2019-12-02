@@ -1,6 +1,6 @@
 package org.ld.functions;
 
 @FunctionalInterface
-public interface UncheckedRunnable {
+public interface UCRunnable {
     void run() throws Throwable;
 }

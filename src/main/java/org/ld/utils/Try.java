@@ -22,7 +22,7 @@ public class Try {
     /**
      * 屏蔽受检异常
      */
-    public static <T, R> Function<T, R> of(UncheckedFunction<T, R> mapper) {
+    public static <T, R> Function<T, R> of(UCFunction<T, R> mapper) {
         Objects.requireNonNull(mapper);
         return t -> {
             try {
@@ -36,7 +36,7 @@ public class Try {
     /**
      * 屏蔽受检异常 并给出默认值默认值
      */
-    public static <T, R> Function<T, R> of(UncheckedFunction<T, R> mapper, Supplier<R> defaultValue) {
+    public static <T, R> Function<T, R> of(UCFunction<T, R> mapper, Supplier<R> defaultValue) {
         Objects.requireNonNull(mapper);
         return t -> {
             try {
@@ -47,7 +47,7 @@ public class Try {
         };
     }
 
-    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier) {
+    public static <T> Supplier<T> of(UCSupplier<T> uncheckedSupplier) {
         Objects.requireNonNull(uncheckedSupplier);
         return () -> {
             try {
@@ -58,7 +58,7 @@ public class Try {
         };
     }
 
-    public static <T> Supplier<T> of(UncheckedSupplier<T> uncheckedSupplier,Supplier<T> defaultValue) {
+    public static <T> Supplier<T> of(UCSupplier<T> uncheckedSupplier, Supplier<T> defaultValue) {
         Objects.requireNonNull(uncheckedSupplier);
         return () -> {
             try {
@@ -69,7 +69,7 @@ public class Try {
         };
     }
 
-    public static <T> Predicate<T> of(UncheckedPredicate<T> uncheckedPredicate) {
+    public static <T> Predicate<T> of(UCPredicate<T> uncheckedPredicate) {
         Objects.requireNonNull(uncheckedPredicate);
         return t -> {
             try {
@@ -80,7 +80,7 @@ public class Try {
         };
     }
 
-    public static <T> Predicate<T> of(UncheckedPredicate<T> uncheckedPredicate,boolean defaultValue) {
+    public static <T> Predicate<T> of(UCPredicate<T> uncheckedPredicate, boolean defaultValue) {
         Objects.requireNonNull(uncheckedPredicate);
         return t -> {
             try {
@@ -91,7 +91,7 @@ public class Try {
         };
     }
 
-    public static <T> Consumer<T> of(UncheckedConsumer<T> uncheckedConsumer) {
+    public static <T> Consumer<T> of(UCConsumer<T> uncheckedConsumer) {
         Objects.requireNonNull(uncheckedConsumer);
         return t -> {
             try {
@@ -102,7 +102,7 @@ public class Try {
         };
     }
 
-    public static Runnable of(UncheckedRunnable uncheckedRunnable) {
+    public static Runnable of(UCRunnable uncheckedRunnable) {
         Objects.requireNonNull(uncheckedRunnable);
         return () -> {
             try {

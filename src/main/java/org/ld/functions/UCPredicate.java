@@ -1,6 +1,6 @@
 package org.ld.functions;
 
 @FunctionalInterface
-public interface UncheckedPredicate<T> {
+public interface UCPredicate<T> {
     boolean test(T t) throws Throwable;
 }

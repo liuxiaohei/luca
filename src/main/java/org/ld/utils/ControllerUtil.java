@@ -4,7 +4,7 @@ import org.ld.beans.ResponseBodyBean;
 import org.ld.beans.ValueBean;
 import org.ld.enums.SystemErrorCodeEnum;
 import org.ld.exception.CodeStackException;
-import org.ld.functions.UncheckedSupplier;
+import org.ld.functions.UCSupplier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -20,7 +20,7 @@ public class ControllerUtil {
     /**
      * 转换响应结构体
      */
-    public static Object convertResponseBody(UncheckedSupplier point) {
+    public static Object convertResponseBody(UCSupplier point) {
         try {
             final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setData(point.get());

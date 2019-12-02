@@ -1,6 +1,6 @@
 package org.ld.functions;
 
 @FunctionalInterface
-public interface UncheckedConsumer<T> {
+public interface UCConsumer<T> {
     void accept(T t) throws Throwable;
 }
