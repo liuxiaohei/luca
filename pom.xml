@@ -131,6 +131,10 @@
                     <artifactId>commons-configuration</artifactId>
                     <groupId>commons-configuration</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>objenesis</artifactId>
+                    <groupId>org.objenesis</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
