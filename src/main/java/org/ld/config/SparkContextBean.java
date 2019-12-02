@@ -7,6 +7,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * https://my.oschina.net/woter/blog/1843755
+ */
 @Configuration
 @ConfigurationProperties(prefix = "spark")
 public class SparkContextBean {
