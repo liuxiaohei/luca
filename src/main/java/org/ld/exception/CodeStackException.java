@@ -1,7 +1,5 @@
 package org.ld.exception;
 
-
-import org.ld.beans.ValueBean;
 import org.ld.enums.SystemErrorCodeEnum;
 
 /**
@@ -23,16 +21,12 @@ public class CodeStackException extends RuntimeException {
         this.errorCode = SystemErrorCodeEnum.getSystemError(e).errorCode;
     }
 
-    public ValueBean getValue() {
-        return errorCode.getValue();
+    public ErrorCode getErrorCode() {
+        return errorCode;
     }
 
     public static void throwException(ErrorCode info) {
         throw new CodeStackException(info);
-    }
-
-    public static void throwException(ValueBean value) {
-        throw new CodeStackException(new ErrorCode(value));
     }
 
     public static void throwException(Throwable e) {

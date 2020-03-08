@@ -85,7 +85,11 @@ public class Logger {
     }
 
     public void printStackTrace(Throwable e) {
-        logger.info("Logger", e);
+        logger.error("Logger", e);
+    }
+
+    public void printStackTrace(String shortUuid,Throwable e) {
+        logger.error(shortUuid + ":Logger", e);
     }
 
     public void printWarnStackTrace(Throwable e) {
