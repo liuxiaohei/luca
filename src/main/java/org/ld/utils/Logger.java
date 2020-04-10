@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Logger {
     private final org.slf4j.Logger logger;
 
-    private Logger(Class clazz) {
+    private Logger(Class<?> clazz) {
         logger = LoggerFactory.getLogger(clazz);
     }
 
@@ -24,7 +24,7 @@ public class Logger {
      * @see #newInstance()
      */
     @Deprecated
-    public static Logger newInstance(Class clazz) {
+    public static Logger newInstance(Class<?> clazz) {
         return new Logger(clazz);
     }
 

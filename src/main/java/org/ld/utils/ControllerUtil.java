@@ -20,7 +20,7 @@ public class ControllerUtil {
     /**
      * 转换响应结构体
      */
-    public static Object convertResponseBody(String shortUUid,UCSupplier point) {
+    public static Object convertResponseBody(String shortUUid,UCSupplier<Object> point) {
         try {
             final ResponseBodyBean<Object> result = new ResponseBodyBean<>();
             result.setData(point.get());

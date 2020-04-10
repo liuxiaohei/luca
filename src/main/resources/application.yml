@@ -9,7 +9,7 @@ mybatis:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver        # 配置MySQL的驱动程序类
-    url: jdbc:mysql://127.0.0.1:3306/canal_client   # 数据库连接地址
+    url: jdbc:mysql://127.0.0.1:3306/luca?useSSL=false # 数据库连接地址
     username: root                                  # 数据库用户名
     password: 123456                                # 数据库连接密码
     dbcp2:                                          # 进行数据库连接池的配置
@@ -17,8 +17,3 @@ spring:
       initial-size: 5                               # 初始化提供的连接数
       max-total: 30                                 # 最大的连接数
       max-wait-millis: 30000                        # 等待连接获取的最大超时时间
-
-spark:
-  spark-home: .
-  app-name: sparkTest
-  master: local[4]
